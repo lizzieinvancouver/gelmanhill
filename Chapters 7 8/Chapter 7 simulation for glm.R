@@ -1,8 +1,7 @@
 ## Read in the data
 # Data are at http://www.stat.columbia.edu/~gelman/arm/examples/arsenic
 
-setwd("~/Dropbox/Work/Harvard/Wolkovich Lab/gelmanhill/ARM_Data/arsenic")
-wells <- read.table ("wells.dat")
+wells <- read.table ("ARM_Data/arsenic/wells.dat")
 attach.all (wells)
 
 ## Logistic regression 
@@ -63,7 +62,7 @@ y.tilde <- ifelse (z.tilde>0, 1, 0)
 
 # The R codes & data files should be saved in the same directory for
 # the source command to work
-source('~/Dropbox/Work/Harvard/Wolkovich Lab/gelmanhill/Book_Codes/Ch.6/6.7_More complex glm.R', chdir = TRUE)
+source('Book_Codes/Ch.6/6.7_More complex glm.R')
 
 ### Compound models
 

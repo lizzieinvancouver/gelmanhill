@@ -3,8 +3,6 @@
 
 # DF edit
 
-setwd("~/Dropbox/Work/Harvard/Wolkovich Lab/gelmanhill/")
-
 library ("arm")
 
 grades <- read.table ("ARM_Data/simulation/gradesW4315.dat", header=TRUE)

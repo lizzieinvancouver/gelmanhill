@@ -1,12 +1,11 @@
 ## Read & clean the data
 # Data are at http://www.stat.columbia.edu/~gelman/arm/examples/cong3
 
-setwd("~/Dropbox/Work/Harvard/Wolkovich Lab/gelmanhill/ARM_Data/")
 
 congress <- vector ("list", 49)
 for (i in 1:49){
   year <- 1896 + 2*(i-1)
-  file <- paste ("cong3/", year, ".asc", sep="")
+  file <- paste ("ARM_Data/cong3/", year, ".asc", sep="")
   data.year <- matrix (scan (file), byrow=TRUE, ncol=5)
   data.year <- cbind (rep(year, nrow(data.year)), data.year)
   congress[[i]] <- data.year

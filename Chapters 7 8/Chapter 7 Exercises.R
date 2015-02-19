@@ -33,7 +33,7 @@ length(simz[simz==1])/length(simz)
 # savings $5 per unit, se $. Mrket of 40000, se 10000. Total amount of money saved?
 
 # 5. Using FIA data
-setwd('~/Dropbox/Work/Harvard/Wolkovich Lab/gelmanhill/')
+
 load('Extra_Data/ExampleFIA.RData')
 
 m4 <- lm(log(biom) ~ S*FDA 

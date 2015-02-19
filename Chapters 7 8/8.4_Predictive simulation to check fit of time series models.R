@@ -2,7 +2,7 @@
 # Data are at http://www.stat.columbia.edu/~gelman/arm/examples/unemployment
 library ("arm")
 
-unemployment <- read.table ("unemployment.dat", header=TRUE)
+unemployment <- read.table ("ARM_Data/unemployment/unemployment.dat", header=TRUE)
 year <- unemployment$year
 y <- unemployment$unemployed.pct
 

@@ -71,8 +71,9 @@ lines(density(avg.height), col = "blue", lwd = 2) # Adding density line , altern
 
 #### 7.2 
 
+setwd("~/Documents/H/gelmanhill") # DF
 
-source('~/Dropbox/Work/Harvard/Wolkovich Lab/gelmanhill/Book_Codes/Ch.4/4.4_Log transformations.R', chdir = TRUE)
+source('Book_Codes/Ch.4/4.4_Log transformations.R', chdir = TRUE)
 ## Simulation to represent predictive uncertainty
 
  # Model of log earnings with interactions

@@ -7,7 +7,7 @@
 
 
 
-heights <- read.dta ("~/Dropbox/Work/Harvard/Wolkovich Lab/gelmanhill/ARM_Data/earnings/heights.dta")
+heights <- read.dta ("ARM_Data/earnings/heights.dta")
 attach.all (heights)
 male <- 2 - sex
 ok <- !is.na (earn+height+male)
