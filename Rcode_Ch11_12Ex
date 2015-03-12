@@ -69,21 +69,22 @@ ranef(matmod1)
 (matmod4<-lmer(rwi~MAT+(0+MAT|ind),REML=FALSE))#allows slope to vary(not intercept)- does anyone ever do this? i've never seen this
 (matmod5<-lmer(rwi~MAT+(-1+MAT|ind),REML=FALSE))#allows slope to vary(not intercept)- does anyone ever do this? i've never seen this
 #2.a.model predicting   
-multilevmod=lmer(ys~time+(1|newpid), data=cd4dat)
-summary(multilevmod)
-coef(multilevmod)
-ranef(multilevmod)
+head(cd4dat)
+
+multilevmod1=lmer(y~time+(1|newpid), data=cd4dat)
+summary(multilevmod1)
+coef(multilevmod1)
+ranef(multilevmod1)
 #interpret time coef: across all children, regardless of treatmentcd4 declines with time at a rate of -0.36609 units/yer
 #2b. 
 multilevmod2=lmer(y~time+treatmnt+baseage+(1|newpid), data=cd4dat)
-summary(multilevmod2)#reduced child-evel variance comparied with multimod with just time
+summary(multilevmod2)#reduced child-evel variance compared with multimod with just time
 #c & d. numerically exploring effect of partial pooling:
 unpooledmod=lm(y~time, data=cd4dat)
-display(unpooledmod);display(multilevmod);display(multilevmod2)
+display(unpooledmod);display(multilevmod1);display(multilevmod2)
 #unpooledmode=intercept=4.75, se=.08; residual sd = 1.56
-#multilevelmod intercept mod
-without group predictors: int=4.91, se=.32; group var=1.40; residual var=0.77 (dramatically reduced from fully pooled lm)
-#multilevelmod intercept mod with group predictors: int=4.75, se=.10;group var=1.37; residual var=0.77 (reduces group level)
+#multilevelmod intercept modwithout group predictors=multilevmod1: int=4.76, se=.10; group var=1.40; residual var=0.77 (dramatically reduced from fully pooled lm)
+#multilevelmod intercept mod with group predictors=multilevmod2: int=4.91, se=.32;group var=1.37; residual var=0.77 (reduces group level var)
 #figure of no pooling, complete pooling and multilevel model (partial pooling)
 quartz()
 par(mfrow=c(1,2))
@@ -101,4 +102,44 @@ plot (baseage,coef(multilevmod)$newpid[,1], cex.lab=.9, cex.axis=1,
       ylim=c(0,8))
 abline(lm(y~1,dat=cd4dat), lwd=2)
 title("Multilevel model (partial pooling)",cex.main=.9, line=1)#looks like slightly lower varianace (so, some shrinkage), but not as much i as might have expected...did i do something wrong?
+###3.Predictions for new observations and groups
+  ####a. Use multilevmod2 to generate simulation of predicted CD4 %ages for each child in the dataset at a hypothetical next timepoint
+  max(cd4dat$time)#1.938 years
+  time.tilde<-2.2#choose timepoint of 2.2 years
+  sigma.y.hat<-sigma.hat(multilevmod2)$sigma$data#residual variance of y
+  timecoef.hat<-coef(multilevmod2)$newpid$time
+  head(childtab)#treatment=column2, baseage=col 3
+i=1
+ytilde=c(NA,times=250)
+for(i in 1:length(timecoef.hat)){
+  y.tilde.sim<-rnorm(1000,timecoef.hat[i] %*% as.array(1,time.tilde[i],childtab[i,2],childtab[i,3]),sigma.y.hat )
+  y.tilde[i]<-median(y.tilde.sim)
+  length(childtab[,3])
+}
+y.tilde#estimated median of predicted sqrtcd4 %ages for each childat future time point of 2.2 years. 
+y.tilde*y.tilde#all very low!
+#compare to using predict function
+predict(multilevmod2, newdata=data.frame(time=2.2), type='uquantile',se=TRUE)
+predict(multilevmod2)
+
+
+#b use the same model fit to generate simulations of CD4 percentages at each of the time periods for a new child who was 4 years old at baseline
+#assume the new child has a treatment of 1, baseline age of 4, and 
+#first, get estimated values for intercepts and slopes of time and treatment, then generate a new county-level error term whch frmo we will sapmle its normal distribution, 
+fixef(multilevmod2)
+bline.tilde <- 4
+treat<-1
+time1=0
+time2=.5
+time3=1.9
+n.sims=1000
+g.0.hat <- fixef(multilevmod2)["(Intercept)"]
+g.1.hat <- fixef(multilevmod2)["time"]
+g.2.hat <- fixef(multilevmod2)["treatmnt"]
+g.3.hat <- fixef(multilevmod2)["baseage"]
+sigma.a.hat <- sigma.hat(multilevmod2)$sigma$newpid
+##simulate possible intercepts for the new child,I'm not sure how to do this with a range of times...i just picked one time point
+a.tilde <- rnorm (n.sims, g.0.hat + g.1.hat*time1+ g.2.hat*treat+ g.3.hat*bline.tilde, sigma.a.hat)
+#simulate possible cd4 values for new child, at time1...ot sure how to do this 
+y.tilde <- rnorm (n.sims, a.tilde + b.hat*x.tilde, sigma.y.hat)
 
