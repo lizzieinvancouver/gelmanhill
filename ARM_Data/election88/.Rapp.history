@@ -1,0 +1,1696 @@
+head(d)
+baseage <- d$treatment[!duplicated(d$newpid)]
+age <- d$baseage[!duplicated(d$newpid)]#
+treat <- d$treatment[!duplicated(d$newpid)]
+step2 <- lm(coef(step1)[1:254] ~ age + treat)
+treat <- d$treatmnt[!duplicated(d$newpid)]
+treat
+age
+step2 <- lm(coef(step1)[1:254] ~ age + treat)
+summary(step2)
+head(D)
+head(d)
+d$time <- d$visdate - d$baseage
+d$time <- d$visage - d$baseage
+step1 <- lm(sqrt(CD4PCT) ~ -1 + as.factor(newpid) * time, data = d)
+age <- d$baseage[!duplicated(d$newpid)]#
+treat <- d$treatmnt[!duplicated(d$newpid)]#
+#
+step2 <- lm(coef(step1)[1:254] ~ age + treat)
+summary(step2)
+library(vegan)
+?adonis
+example(adonis)
+head(dat)
+Y
+dune
+Y
+library(gdata)#
+gr <- read.xls("~/Dropbox/Teaching/Simmons/Grades.xlsx")
+head(gr)
+hist(gr$Midterm)
+summary(gr$Midterm)
+gr$raw <- round(gr$Midterm/43*100,1)
+summary(gr$raw)
+gr$adj <- round(gr$Midterm/43*100+13,1)
+gr$adj <- round((gr$Midterm+13)/43*100,1)
+summary(gr$adj)
+gr$adj <- round(gr$Midterm/43*100,1)+13
+summary(gr$adj)
+hist(gr$adj)
+gr$adj <- round(gr$Midterm/43*100,1)+10
+hist(gr$adj)
+gr$adj <- round((gr$Midterm+gr$midterm.extra)/43*100,1)+10
+gr$adj2 <- round((gr$Midterm+gr$midterm.extra)/43*100,1)+10
+gr$adj <- round(gr$Midterm/43*100,1)+10
+summary(gr$adj2)
+hist(gr$adj2)
+?cut
+example(cut)
+seq(50, 100, by = 10)
+50+c(0, 3, 7)
+(50+c(0, 3, 7))+10
+seq(50+c(0, 3, 7)), 107, by = 10)
+seq((50+c(0, 3, 7)), 107, by = 10)
+seq(50, 100, by = 10)
+seq(53, 103, by = 10)
+sort(c(seq(50, 100, by = 10), seq(53, 103, by = 10), seq(57, 107, by = 10)))
+cut(gr$adj2, breaks = sort(c(seq(50, 100, by = 10), seq(53, 103, by = 10), seq(57, 107, by = 10))))
+head(gr$adj2)
+head(gr$adj)
+gr$adj
+gr$adj2
+gr$midterm.extra
+gr <- read.xls("~/Dropbox/Teaching/Simmons/Grades.xlsx")#
+#
+hist(gr$Midterm)#
+summary(gr$Midterm)#
+#
+# Raw pct#
+gr$raw <- round(gr$Midterm/43*100,1)#
+#
+# median raw 72; make this a B by adding 10 pct points#
+#
+gr$adj <- round(gr$Midterm/43*100,1)+10#
+#
+# Now add in extra credit#
+#
+gr$adj2 <- round((gr$Midterm+gr$midterm.extra)/43*100,1)+10#
+#
+summary(gr$adj2)#
+hist(gr$adj2)
+cut(gr$adj2, breaks = sort(c(seq(50, 100, by = 10), seq(53, 103, by = 10), seq(57, 107, by = 10))))
+!is.na(gr$Midterm)
+gr <- gr[!is.na(gr$Midterm),]
+hist(gr$Midterm)#
+summary(gr$Midterm)#
+#
+# Raw pct#
+gr$raw <- round(gr$Midterm/43*100,1)#
+#
+# median raw 72; make this a B by adding 10 pct points#
+#
+gr$adj <- round(gr$Midterm/43*100,1)+10#
+#
+# Now add in extra credit
+cut(gr$adj2, breaks = sort(c(seq(50, 100, by = 10), seq(53, 103, by = 10), seq(57, 107, by = 10))))
+?cut
+c(seq(50, 99, by = 10)
+seq(50, 99, by = 10)
+seq(50, 99, by = 9)
+seq(1, 100, by = 10)
+seq(0, 100, by = 10)
+seq(0, 50, by = 10)
+?sum
+??psum
+c(50, 52, 59) %+% seq(0, 50, by = 10)
+rep(seq(0, 50, by = 10), 3)
+c(50, 52, 59)+rep(seq(0, 50, by = 10), 3)
+c(50, 52, 59)+sort(rep(seq(0, 50, by = 10), 3))
+cut(gr$adj2, #
+	breaks =  c(50, 52, 59)+sort(rep(seq(0, 50, by = 10), 3)),#
+				#sort(c(seq(50, 99, by = 10), #
+				#seq(53, 103, by = 10), seq(57, 107, by = 10)))
+)
+c(50, 52, 56, 59)+sort(rep(seq(0, 50, by = 10), 3)),
+c(50, 52, 56, 59)+sort(rep(seq(0, 50, by = 10), 3))
+cut(gr$adj2, #
+	breaks =  c(50, 52, 56, 59)+sort(rep(seq(0, 50, by = 10), 4)),#
+				#sort(c(seq(50, 99, by = 10), #
+				#seq(53, 103, by = 10), seq(57, 107, by = 10)))
+)
+c(50, 52, 56, 59)+sort(rep(seq(0, 50, by = 10), 4))
+cut(gr$adj2, #
+	breaks =  c(50, 52, 56)+sort(rep(seq(0, 50, by = 10), 3)),#
+				#sort(c(seq(50, 99, by = 10), #
+				#seq(53, 103, by = 10), seq(57, 107, by = 10)))
+)
+cut(gr$adj2, #
+	breaks =  c(49, 52, 56)+sort(rep(seq(0, 50, by = 10), 3)),#
+				#sort(c(seq(50, 99, by = 10), #
+				#seq(53, 103, by = 10), seq(57, 107, by = 10)))
+)
+cut(gr$adj2, #
+	breaks =  c(50, 53, 57)+sort(rep(seq(0, 50, by = 10), 3)),#
+				#sort(c(seq(50, 99, by = 10), #
+				#seq(53, 103, by = 10), seq(57, 107, by = 10))),
+)
+gr$gr <- #
+	cut(gr$adj2, #
+	breaks =  c(50, 53, 57)+sort(rep(seq(0, 50, by = 10), 3)),#
+				#sort(c(seq(50, 99, by = 10), #
+				#seq(53, 103, by = 10), seq(57, 107, by = 10)))
+)
+head(gr)
+gr[c("raw","adj2","gr")]
+cut(gr$adj2, #
+	breaks =  c(50, 53, 57)+sort(rep(seq(0, 50, by = 10), 3)),#
+				#sort(c(seq(50, 99, by = 10), #
+				#seq(53, 103, by = 10), seq(57, 107, by = 10)))
+)
+LETTERS[4:1]
+rep(c("-","","+"),4)
+paste(LETTERS[4:1], rep(c("-","","+"),4))
+rep(LETTERS[4:1],3)
+sort(rep(LETTERS[4:1],3))
+paste(sort(rep(LETTERS[4:1],3),T), rep(c("-","","+")
+)
+c(rep("F",3),paste(sort(rep(LETTERS[4:1],3),T), rep(c("-","","+"),4),sep=""))
+gr$gr <- #
+	cut(gr$adj2, #
+	breaks =  c(50, 53, 57)+sort(rep(seq(0, 50, by = 10), 3)),#
+				#sort(c(seq(50, 99, by = 10), #
+				#seq(53, 103, by = 10), seq(57, 107, by = 10))),#
+	labels = c(rep("F",3),paste(sort(rep(LETTERS[4:1],3),T), rep(c("-","","+"),4),sep=""))#
+	)
+cut(gr$adj2, #
+	breaks =  c(50, 53, 57)+sort(rep(seq(0, 50, by = 10), 3)),#
+				#sort(c(seq(50, 99, by = 10), #
+				#seq(53, 103, by = 10), seq(57, 107, by = 10))),#
+	labels = c(rep("F",3),paste(sort(rep(LETTERS[4:1],3),T), rep(c("-","","+"),4),sep=""))#
+	)
+cut(gr$adj2, #
+	breaks =  c(50, 53, 57)+sort(rep(seq(0, 50, by = 10), 3)),#
+				#sort(c(seq(50, 99, by = 10), #
+				#seq(53, 103, by = 10), seq(57, 107, by = 10))),
+)
+c(rep("F",3), paste(sort(rep(LETTERS[4:1],3),T), rep(c("-","","+"),4),sep=""), "A+","A+")
+length(c(rep("F",3), paste(sort(rep(LETTERS[4:1],3),T), rep(c("-","","+"),4),sep=""), "A+","A+"))
+gr$gr <- #
+	cut(gr$adj2, #
+	breaks =  c(50, 53, 57)+sort(rep(seq(0, 50, by = 10), 3)),#
+				#sort(c(seq(50, 99, by = 10), #
+				#seq(53, 103, by = 10), seq(57, 107, by = 10))),#
+	labels = c(rep("F",3), paste(sort(rep(LETTERS[4:1],3),T), rep(c("-","","+"),4),sep=""), "A+","A+")#
+	)
+c(rep("F",3), paste(sort(rep(LETTERS[4:1],3),T), rep(c("-","","+"),4),sep=""), "A+","A+")
+gr[c("raw","adj2","gr")]
+hist(gr$gr)
+plot(gr$gr)
+gr$gr
+gr$gr <- as.factor(as.character(gr$gr))
+gr[c("raw","adj2","gr")]
+summary(gr)
+summary(gr$gr)
+gr$adj2 <- round((gr$Midterm+gr$midterm.extra)/43*100,1)+8#
+#
+summary(gr$adj2)#
+hist(gr$adj2)#
+#
+# convert to grades#
+#
+gr$gr <- #
+	cut(gr$adj2, #
+	breaks =  c(50, 53, 57)+sort(rep(seq(0, 50, by = 10), 3)),#
+				#sort(c(seq(50, 99, by = 10), #
+				#seq(53, 103, by = 10), seq(57, 107, by = 10))),#
+	labels = c(rep("F",3), paste(sort(rep(LETTERS[4:1],3),T), rep(c("-","","+"),4),sep=""), "A+","A+")#
+	)#
+gr$gr <- as.factor(as.character(gr$gr))#
+gr[c("raw","adj2","gr")]
+summary(gr$gr)
+summary(gr$Midterm)
+summary(gr$raw)
+gr$adj <- round(gr$Midterm/43*100,1)+8#
+#
+# Now add in extra credit#
+#
+gr$adj2 <- round((gr$Midterm+gr$midterm.extra)/43*100,1)+8#
+#
+summary(gr$adj2)#
+hist(gr$adj2)#
+#
+# convert to grades#
+#
+gr$gr <- #
+	cut(gr$adj2, #
+	breaks =  c(50, 53, 57)+sort(rep(seq(0, 50, by = 10), 3)),#
+				#sort(c(seq(50, 99, by = 10), #
+				#seq(53, 103, by = 10), seq(57, 107, by = 10))),#
+	labels = c(rep("F",3), paste(sort(rep(LETTERS[4:1],3),T), rep(c("-","","+"),4),sep=""), "A+","A+")#
+	)#
+gr$gr <- as.factor(as.character(gr$gr))#
+gr[c("raw","adj2","gr")]
+barplot(gr$gr)
+barplot(tapply(gr$gr, gr$gr, length))
+gr$gr
+levels(gr$gr)
+gr$gr <- #
+	cut(gr$adj2, #
+	breaks =  c(50, 53, 57)+sort(rep(seq(0, 50, by = 10), 3)),#
+				#sort(c(seq(50, 99, by = 10), #
+				#seq(53, 103, by = 10), seq(57, 107, by = 10))),#
+	labels = c(rep("F",3), paste(sort(rep(LETTERS[4:1],3),T), rep(c("-","","+"),4),sep=""), "A+","A+")#
+	)
+barplot(tapply(gr$gr, gr$gr, length))
+breaks <- c(50, 53, 57)+sort(rep(seq(0, 50, by = 10), 3))
+breaks
+length(breaks)
+breaks <- c(50, 53, 57)+sort(rep(seq(0, 50, by = 10), 3))#
+breaks[1] = 40#
+breaks = breaks[1:16]#
+breaks[16] = 125
+breaks
+cut(gr$adj2, #
+	breaks =  ,#
+				#sort(c(seq(50, 99, by = 10), #
+				#seq(53, 103, by = 10), seq(57, 107, by = 10))),
+cut(gr$adj2, #
+	breaks =  breaks
+)
+cut(gr$adj2, #
+	breaks =  breaks)
+c(60,63, 67)+sort(rep(seq(0, 40, by = 10), 3))
+breaks <- c(60,63, 67)+sort(rep(seq(0, 40, by = 10), 3))
+breaks
+breaks = c(40, breaks)
+breaks[1:16]
+breaks = breaks[1:14]
+breaks[1:14]
+breaks[14] = 125
+breaks
+gr$gr <- #
+	cut(gr$adj2, #
+	breaks =  breaks,#
+				#sort(c(seq(50, 99, by = 10), #
+				#seq(53, 103, by = 10), seq(57, 107, by = 10))),#
+	labels = c("F", paste(sort(rep(LETTERS[4:1],3),T), rep(c("-","","+"),4),sep=""))#
+	)
+gr[c("raw","adj2","gr")]
+barplot(tapply(gr$gr, gr$gr, length))
+gr$adj2 <- round((gr$Midterm+gr$midterm.extra)/43*100,1)+10#
+#
+summary(gr$adj2)#
+hist(gr$adj2)#
+#
+# convert to grades#
+breaks <- c(60,63, 67)+sort(rep(seq(0, 40, by = 10), 3))#
+breaks = c(40, breaks)#
+breaks = breaks[1:14]#
+breaks[14] = 125 #
+#
+gr$gr <- #
+	cut(gr$adj2, #
+	breaks =  breaks,#
+				#sort(c(seq(50, 99, by = 10), #
+				#seq(53, 103, by = 10), seq(57, 107, by = 10))),#
+	labels = c("F", paste(sort(rep(LETTERS[4:1],3),T), rep(c("-","","+"),4),sep=""))#
+	)#
+gr[c("raw","adj2","gr")]#
+barplot(tapply(gr$gr, gr$gr, length))
+gr$adj2 <- round((gr$Midterm+gr$midterm.extra)/43*100,1)+9#
+#
+summary(gr$adj2)#
+hist(gr$adj2)#
+#
+# convert to grades#
+breaks <- c(60,63, 67)+sort(rep(seq(0, 40, by = 10), 3))#
+breaks = c(40, breaks)#
+breaks = breaks[1:14]#
+breaks[14] = 125 #
+#
+gr$gr <- #
+	cut(gr$adj2, #
+	breaks =  breaks,#
+				#sort(c(seq(50, 99, by = 10), #
+				#seq(53, 103, by = 10), seq(57, 107, by = 10))),#
+	labels = c("F", paste(sort(rep(LETTERS[4:1],3),T), rep(c("-","","+"),4),sep=""))#
+	)#
+gr[c("raw","adj2","gr")]#
+barplot(tapply(gr$gr, gr$gr, length))
+summary(gr$gr)
+barplot(tapply(gr$gr, gr$gr, length), ylab = "Number of students")
+hist(gr$adj2)
+gr
+barplot(tapply(gr$gr, gr$gr, length), ylab = "Number of students")
+barplot(tapply(gr$gr, gr$gr, length), ylab = "Number of students",#
+	col = "lightblue")
+barplot(tapply(gr$gr, gr$gr, length), ylab = "Number of students",#
+	col = "lightblue",#
+	main = "BIOL 104 Midterm Summary")
+hist(gr$adj2)
+write.csv(gr, "~/Dropbox/Teaching/Simmons/Midterm/Midterm Graded.csv", row.names=F)
+gr$adj2 <- round((gr$Midterm+gr$midterm.extra)/43*100,1)+9
+round((24.5+2)/43*100,1)+9
+# simmons grades#
+#
+library(gdata)#
+gr <- read.xls("~/Dropbox/Teaching/Simmons/Grades.xlsx")#
+#
+gr <- gr[!is.na(gr$Midterm),]#
+#
+hist(gr$Midterm)#
+summary(gr$Midterm)#
+#
+# Raw pct#
+gr$raw <- round(gr$Midterm/43*100,1)#
+#
+# median raw 72; make this a B by adding 8 pct points#
+#
+gr$adj <- round(gr$Midterm/43*100,1)+10#
+#
+# Now add in extra credit#
+#
+gr$adj2 <- round((gr$Midterm+gr$midterm.extra)/43*100,1)+9
+summary(gr$adj2)#
+hist(gr$adj2)#
+#
+# convert to grades#
+breaks <- c(60,63, 67)+sort(rep(seq(0, 40, by = 10), 3))#
+breaks = c(40, breaks)#
+breaks = breaks[1:14]#
+breaks[14] = 125 #
+#
+gr$gr <- #
+	cut(gr$adj2, #
+	breaks =  breaks,#
+				#sort(c(seq(50, 99, by = 10), #
+				#seq(53, 103, by = 10), seq(57, 107, by = 10))),#
+	labels = c("F", paste(sort(rep(LETTERS[4:1],3),T), rep(c("-","","+"),4),sep=""))#
+	)#
+gr[c("raw","adj2","gr")]#
+#
+summary(gr$gr)#
+barplot(tapply(gr$gr, gr$gr, length), ylab = "Number of students",#
+	col = "lightblue",#
+	main = "BIOL 104 Midterm Summary")#
+hist(gr$adj2)#
+write.csv(gr, "~/Dropbox/Teaching/Simmons/Midterm/Midterm Graded.csv", row.names=F)
+summary(gr)
+# simmons grades#
+#
+library(gdata)#
+gr <- read.xls("~/Dropbox/Teaching/Simmons/Grades.xlsx")#
+#
+gr <- gr[!is.na(gr$Midterm),]#
+#
+hist(gr$Midterm)#
+summary(gr$Midterm)#
+#
+# Raw pct#
+gr$raw <- round(gr$Midterm/43*100,1)
+summary(gr)
+31.25/43
+31.25/43*100
+31.25/43*100+9
+gr$adj <- round(gr$Midterm/43*100,1)+9
+# simmons grades#
+#
+library(gdata)#
+gr <- read.xls("~/Dropbox/Teaching/Simmons/Grades.xlsx")#
+#
+gr <- gr[!is.na(gr$Midterm),]#
+#
+hist(gr$Midterm)#
+summary(gr$Midterm)#
+#
+# Raw pct#
+gr$raw <- round(gr$Midterm/43*100,1)#
+#
+# median raw 72; make this a B by adding 8 pct points#
+#
+gr$adj <- round(gr$Midterm/43*100,1)+9#
+#
+# Now add in extra credit
+gr$adj2 <- round((gr$Midterm+gr$midterm.extra)/43*100,1)+9
+summary(gr$adj)
+summary(gr$adj2)
+gr$adj2 <- round((gr$Midterm+gr$midterm.extra)/43*100,1)+9
+library(rstan)
+schools_dat <- list(J = 8, #
+                    y = c(28,  8, -3,  7, -1,  1, 18, 12),#
+                    sigma = c(15, 10, 16, 11,  9, 11, 10, 18))
+setwd("~/Dropbox/Work/Harvard/Wolkovich Lab/gelmanhill/R/Stan")
+setwd("~/Dropbox/Work/Harvard/Wolkovich Lab/Gelman_Hill/Stan")
+schools_dat <- list(J = 8, #
+                    y = c(28,  8, -3,  7, -1,  1, 18, 12),#
+                    sigma = c(15, 10, 16, 11,  9, 11, 10, 18))
+fit <- stan(file = '8schools.stan', data = schools_dat, #
+            iter = 1000, chains = 4)
+# Stan setup on a mac#
+#
+# From https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started#
+#
+# Install:#
+# source('http://mc-stan.org/rstan/install.R', echo = TRUE, max.deparse.length = 2000)#
+# install_rstan()#
+#
+library(rstan)#
+#
+# setwd to Stan#
+# setwd("~/Dropbox/Work/Harvard/Wolkovich Lab/Gelman_Hill/Stan")#
+#
+# 8schools from Gelman 2003 Ch 5#
+schools_dat <- list(J = 8, #
+                    y = c(28,  8, -3,  7, -1,  1, 18, 12),#
+                    sigma = c(15, 10, 16, 11,  9, 11, 10, 18))#
+#
+fit <- stan(file = '8schools.stan', data = schools_dat, #
+            iter = 1000, chains = 4)
+schools_code <- paste(readLines('8schools.stan'), collapse = '\n')#
+fit1 <- stan(model_code = schools_code, data = schools_dat, #
+             iter = 1000, chains = 4)
+fit2 <- stan(fit = fit1, data = schools_dat, iter = 10000, chains = 4)
+print(fit2)#
+plot(fit2)
+la <- extract(fit2, permuted = TRUE) # return a list of arrays #
+mu <- la$mu
+### return an array of three dimensions: iterations, chains, parameters #
+a <- extract(fit2, permuted = FALSE)
+### use S3 functions as.array (or as.matrix) on stanfit objects#
+a2 <- as.array(fit2)#
+m <- as.matrix(fit2)#
+#
+print(fit, digits = 1)#
+#
+## Rats example
+y <- read.table('rats.txt', header = TRUE)#
+x <- c(8, 15, 22, 29, 36)#
+rats_dat <- list(N = nrow(y), T = ncol(y), #
+                 x = x, y = y, xbar = mean(x))#
+rats_fit <- stan(file = 'rats.stan', data = rats_dat, verbose = FALSE)
+data <- list ("n", "n.age", "n.edu", "n.state", "n.region",#
+ "y", "female", "black", "age", "edu", "state", "region", "v.prev")#
+inits <- function () {list(#
+  b.0=rnorm(1), b.female=rnorm(1), b.black=rnorm(1), b.female.black=rnorm(1),#
+  a.age=rnorm(n.age), a.edu=rnorm(n.edu),#
+  a.age.edu=array (rnorm(n.age*n.edu), c(n.age,n.edu)),#
+  a.state=rnorm(n.state), a.region=rnorm(n.region),#
+  sigma.age=runif(1), sigma.edu=runif(1), sigma.age.edu=runif(1),#
+  sigma.state=runif(1), sigma.region=runif(1))#
+}
+data
+inits
+?bugs
+library(R2WinBUGS)
+?bugs
+summ <- summary(M2)
+## Read the data & define variables#
+# Data are at http://www.stat.columbia.edu/~gelman/arm/examples/election88#
+library (foreign)#
+library(arm)#
+library(R2WinBUGS)#
+# Set up the data for the election88 example#
+# Load in data for region indicators#
+# Use "state", an R data file (type ?state from the R command window for info)#
+##
+# Regions:  1=northeast, 2=south, 3=north central, 4=west, 5=d.c.#
+# We have to insert d.c. (it is the 9th "state" in alphabetical order)#
+data (state)                  # "state" is an R data file#
+state.abbr <- c (state.abb[1:8], "DC", state.abb[9:50])#
+dc <- 9#
+not.dc <- c(1:8,10:51)#
+region <- c(3,4,4,3,4,4,1,1,5,3,3,4,4,2,2,2,2,3,3,1,1,1,2,2,3,2,4,2,4,1,1,4,1,3,2,2,3,4,1,1,3,2,3,3,4,1,3,4,1,2,4)#
+# Load in data from the CBS polls in 1988#
+# Data are at http://www.stat.columbia.edu/~gelman/arm/examples/election88#
+setwd("~/Documents/H/ARM_Data/election88/") # location of your github directory gelmanhill#
+polls <- read.dta ("polls.dta")#
+attach.all (polls)#
+# Select just the data from the last survey (#9158)#
+table (survey)                # look at the survey id's#
+ok <- survey==9158            # define the condition#
+polls.subset <- polls[ok,]    # select the subset of interest#
+attach.all (polls.subset)     # attach the subset#
+write.table (polls.subset, "polls.subset.dat")#
+print (polls.subset[1:5,])#
+# define other data summaries#
+y <- bush                  # 1 if support bush, 0 if support dukakis#
+n <- length(y)             # of survey respondents#
+n.age <- max(age)          # of age categories#
+n.edu <- max(edu)          # of education categories#
+n.state <- max(state)      # of states#
+n.region <- max(region)    # of regions#
+# compute unweighted and weighted averages for the U.S.#
+ok <- !is.na(y)                                    # remove the undecideds#
+cat ("national mean of raw data:", round (mean(y[ok]==1), 3), "\n")#
+cat ("national weighted mean of raw data:",#
+     round (sum((weight*y)[ok])/sum(weight[ok]), 3), "\n")#
+# compute weighted averages for the states#
+raw.weighted <- rep (NA, n.state)#
+names (raw.weighted) <- state.abbr#
+for (i in 1:n.state){			# for each state#
+  ok <- !is.na(y) & state==i	# eliminate NA from the response y#
+  raw.weighted[i] <- sum ((weight*y)[ok])/sum(weight[ok]) # calculate weighted sum. * What is the weight in this case?? Not clear from this example#
+}#
+# load in 1988 election data as a validation check#
+election88 <- read.dta ("election88.dta")#
+outcome <- election88$electionresult#
+# load in 1988 census data#
+census <- read.dta ("census88.dta")#
+# also include a measure of previous vote as a state-level predictor#
+presvote <- read.dta ("presvote.dta")#
+attach (presvote)#
+v.prev <- presvote$g76_84pr#
+not.dc <- c(1:8,10:51)#
+candidate.effects <- read.table ("candidate_effects.dat", header=T)#
+v.prev[not.dc] <- v.prev[not.dc] +#
+ (candidate.effects$X76 + candidate.effects$X80 + candidate.effects$X84)/3#
+# candidate.effects _ .5 * region effect + home state adv + south effect +#
+#                     + Catholic effect + candidate ideology effect#
+## Multilevel logistic regression#
+M1 <- lmer (y ~ black + female + (1 | state), family=binomial(link="logit"))#
+display (M1)#
+## A fuller model#
+ # set up the predictors#
+age.edu <- n.edu*(age-1) + edu#
+region.full <- region[state]#
+v.prev.full <- v.prev[state]#
+ # fit the model#
+M2 <- glmer (y ~ black + female + black:female + v.prev.full + (1 | age) + #
+  (1 | edu) + (1 | age.edu) + (1 | state) + (1 | region.full), family=binomial(link="logit"))#
+display (M2)#
+# Warning: Fails to converge... but results match book output#
+#
+# "Divide by 4" rule for interpreting coefficients.#
+round(fixef(M2)[2:5]/4*100, 2)#
+# Roughly the percent chance that a member of this category will be more likely to vote Bush 88.#
+summary(M2)#
+#
+# Start up stan!#
+# https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started#how-to-install-rstan#
+### Fit the model in Bugs#
+#
+data <- list ("n", "n.age", "n.edu", "n.state", "n.region",#
+ "y", "female", "black", "age", "edu", "state", "region", "v.prev")#
+inits <- function () {list(#
+  b.0=rnorm(1), b.female=rnorm(1), b.black=rnorm(1), b.female.black=rnorm(1),#
+  a.age=rnorm(n.age), a.edu=rnorm(n.edu),#
+  a.age.edu=array (rnorm(n.age*n.edu), c(n.age,n.edu)),#
+  a.state=rnorm(n.state), a.region=rnorm(n.region),#
+  sigma.age=runif(1), sigma.edu=runif(1), sigma.age.edu=runif(1),#
+  sigma.state=runif(1), sigma.region=runif(1))#
+}#
+# params <- c ("b.0", "b.female", "b.black", "b.female.black",#
+   # "a.age", "a.edu", "a.age.edu", "a.state", "a.region",#
+   # "sigma.age", "sigma.edu", "sigma.age.edu", "sigma.state", "sigma.region")#
+# M2.bugs <- bugs (data, inits, params, "election88.M2.bug", n.chains=3, n.iter=1000,#
+        # bugs.directory="c:/.../", working.directory=NULL, clearWD=TRUE, debug=TRUE )#
+# Stan.#
+## Plot Figure 14.1 #
+# attach.bugs (M2.bugs)#
+par (mar=c(0,0,0,0))#
+# summ <- M2.bugs$summary[c(2:28),3:7]#
+summ <- summary(M2)
+display (M2)
+M2 <- glmer (y ~ black + female + black:female + v.prev.full + (1 | age) + #
+  (1 | edu) + (1 | age.edu) + (1 | state) + (1 | region.full), family=binomial(link="logit"))
+M1 <- lmer (y ~ black + female + (1 | state), family=binomial(link="logit"))#
+display (M1)#
+## A fuller model#
+ # set up the predictors#
+age.edu <- n.edu*(age-1) + edu#
+region.full <- region[state]#
+v.prev.full <- v.prev[state]
+setwd("~/Documents/H/ARM_Data/election88/") # location of your github directory gelmanhill
+setwd("~/Documents/H/gelmanhill/ARM_Data/election88/") # location of your github directory gelmanhill#
+polls <- read.dta ("polls.dta")
+attach.all (polls)
+# Select just the data from the last survey (#9158)#
+table (survey)                # look at the survey id's#
+ok <- survey==9158            # define the condition#
+polls.subset <- polls[ok,]    # select the subset of interest#
+attach.all (polls.subset)     # attach the subset#
+write.table (polls.subset, "polls.subset.dat")
+print (polls.subset[1:5,])
+# define other data summaries#
+y <- bush                  # 1 if support bush, 0 if support dukakis#
+n <- length(y)             # of survey respondents#
+n.age <- max(age)          # of age categories#
+n.edu <- max(edu)          # of education categories#
+n.state <- max(state)      # of states#
+n.region <- max(region)    # of regions#
+# compute unweighted and weighted averages for the U.S.#
+ok <- !is.na(y)                                    # remove the undecideds#
+cat ("national mean of raw data:", round (mean(y[ok]==1), 3), "\n")#
+cat ("national weighted mean of raw data:",#
+     round (sum((weight*y)[ok])/sum(weight[ok]), 3), "\n")
+# compute weighted averages for the states#
+raw.weighted <- rep (NA, n.state)#
+names (raw.weighted) <- state.abbr#
+for (i in 1:n.state){			# for each state#
+  ok <- !is.na(y) & state==i	# eliminate NA from the response y#
+  raw.weighted[i] <- sum ((weight*y)[ok])/sum(weight[ok]) # calculate weighted sum. * What is the weight in this case?? Not clear from this example#
+}#
+# load in 1988 election data as a validation check#
+election88 <- read.dta ("election88.dta")#
+outcome <- election88$electionresult#
+# load in 1988 census data#
+census <- read.dta ("census88.dta")
+# also include a measure of previous vote as a state-level predictor#
+presvote <- read.dta ("presvote.dta")#
+attach (presvote)#
+v.prev <- presvote$g76_84pr#
+not.dc <- c(1:8,10:51)#
+candidate.effects <- read.table ("candidate_effects.dat", header=T)
+v.prev[not.dc] <- v.prev[not.dc] +#
+ (candidate.effects$X76 + candidate.effects$X80 + candidate.effects$X84)/3
+## Multilevel logistic regression#
+M1 <- lmer (y ~ black + female + (1 | state), family=binomial(link="logit"))#
+display (M1)
+M1 <- glmer (y ~ black + female + (1 | state), family=binomial(link="logit"))#
+display (M1)
+## A fuller model#
+ # set up the predictors#
+age.edu <- n.edu*(age-1) + edu#
+region.full <- region[state]#
+v.prev.full <- v.prev[state]
+# fit the model#
+M2 <- glmer (y ~ black + female + black:female + v.prev.full + (1 | age) + #
+  (1 | edu) + (1 | age.edu) + (1 | state) + (1 | region.full), family=binomial(link="logit"))#
+display (M2)#
+# Warning: Fails to converge... but results match book output
+# "Divide by 4" rule for interpreting coefficients.#
+round(fixef(M2)[2:5]/4*100, 2)#
+# Roughly the percent chance that a member of this category will be more likely to vote Bush 88.#
+summary(M2)
+length(black)
+y
+max(age)
+max(edu)
+max(state)
+mdat <- list(N = length(black),#
+			 N.age = max(age),#
+			 N.edu = max(edu),#
+			 N.state = max(state),#
+			 N.region = max(region),#
+			 y = y,#
+			 female = female,#
+			 black = black,#
+			 age = age,#
+			 edu = edu,#
+			 state = state,#
+			 v.prev = vprev)
+mdat <- list(N = length(black),#
+			 N.age = max(age),#
+			 N.edu = max(edu),#
+			 N.state = max(state),#
+			 N.region = max(region),#
+			 y = y,#
+			 female = female,#
+			 black = black,#
+			 age = age,#
+			 edu = edu,#
+			 state = state,#
+			 v.prev = v.prev)
+mdata
+mdat
+mdat <- list(N = length(black),#
+			 N.age = max(age),#
+			 N.edu = max(edu),#
+			 N.state = max(state),#
+			 N.region = max(region),#
+			 y = y,#
+			 female = female,#
+			 black = black,#
+			 age = age,#
+			 edu = edu,#
+			 state = state,#
+			 v.prev = v.prev#
+				b.0=rnorm(1), #
+				b.female=rnorm(1), #
+				b.black=rnorm(1), #
+				b.female.black=rnorm(1),#
+  				a.age=rnorm(n.age), #
+  				a.edu=rnorm(n.edu),#
+  				a.age.edu=array(rnorm(n.age*n.edu), c(n.age,n.edu)),#
+				a.state=rnorm(n.state), #
+				a.region=rnorm(n.region),#
+  				sigma.age=runif(1), #
+  				sigma.edu=runif(1), #
+  				sigma.age.edu=runif(1),#
+  				sigma.state=runif(1), #
+  				sigma.region=runif(1)			 #
+			 )
+mdat <- list(N = length(black),#
+			 N.age = max(age),#
+			 N.edu = max(edu),#
+			 N.state = max(state),#
+			 N.region = max(region),#
+			 y = y,#
+			 female = female,#
+			 black = black,#
+			 age = age,#
+			 edu = edu,#
+			 state = state,#
+			 v.prev = v.prev,#
+				b.0=rnorm(1), #
+				b.female=rnorm(1), #
+				b.black=rnorm(1), #
+				b.female.black=rnorm(1),#
+  				a.age=rnorm(n.age), #
+  				a.edu=rnorm(n.edu),#
+  				a.age.edu=array(rnorm(n.age*n.edu), c(n.age,n.edu)),#
+				a.state=rnorm(n.state), #
+				a.region=rnorm(n.region),#
+  				sigma.age=runif(1), #
+  				sigma.edu=runif(1), #
+  				sigma.age.edu=runif(1),#
+  				sigma.state=runif(1), #
+  				sigma.region=runif(1)			 #
+			 )
+mdat
+?dunif
+summ <- summary(M2)
+summ
+coef(M2)
+m_code <- '#
+#
+data {#
+	int n;#
+	int n.age;#
+	int n.edu;#
+	int n.state;#
+	int n.region;#
+	int y[n];#
+	vector[n] age;#
+	vector[n] edu;#
+	vector[n] state;#
+	vector[n] region;#
+	vector[n] female;#
+	vector[n] black;#
+#
+	}#
+parameters{#
+	real b.black;#
+	real b.female;#
+	real b.female.black;#
+#
+	real a.age;#
+	real a.edu;#
+	real age.edu;#
+	real a.state;#
+	real a.region;#
+	real tau.age;#
+	real tau.edu#
+	real tau.age.edu;#
+	real tau.state;#
+	real tau.region;#
+	real sigma.age;#
+	real sigma.edu;#
+	real sigma.age.edu;#
+	real sigma.state#
+	read sigma.region;#
+	}		#
+model {#
+  	b.0 ~ dnorm (0, .0001);#
+	b.female ~ dnorm (0, .0001);#
+			  b.black ~ dnorm (0, .0001);#
+			  b.female.black ~ dnorm (0, .0001);#
+			  for (j in 1:n.age) {a.age[j] ~ dnorm(0, tau.age)};#
+			  for (j in 1:n.edu) {a.edu[j] ~ dnorm(0, tau.edu)};#
+			  for (j in 1:n.age) {for (k in 1:n.edu){#
+			    a.age.edu[j,k] ~ dnorm(0, tau.age.edu)}};#
+			  for (j in 1:n.state) {#
+			    a.state[j] ~ dnorm(a.state.hat[j], tau.state)#
+			    a.state.hat[j] <- a.region[region[j]] + b.v.prev*v.prev[j]};#
+			  b.v.prev ~ dnorm (0, .0001) ;#
+			  for (j in 1:n.region) {a.region[j] ~ dnorm(0, tau.region)};#
+			  tau.age <- pow(sigma.age, -2);#
+			  tau.edu <- pow(sigma.edu, -2);#
+			  tau.age.edu <- pow(sigma.age.edu, -2);#
+			  tau.state <- pow(sigma.state, -2);#
+			  tau.region <- pow(sigma.region, -2);#
+			  sigma.age ~ dunif (0, 100);#
+			  sigma.edu ~ dunif (0, 100);#
+			  sigma.age.edu ~ dunif (0, 100);#
+			  sigma.state ~ dunif (0, 100);#
+			  sigma.region ~ dunif (0, 100); #
+  for (i in 1:n){#
+    y[i] ~ dbin (p.bound[i], 1)#
+    p.bound[i] <- max(0, min(1, p[i]))#
+    logit(p[i]) <- Xbeta[i]#
+    Xbeta[i] <- b.0 + b.female*female[i] + b.black*black[i] +#
+      b.female.black*female[i]*black[i] +#
+      a.age[age[i]] + a.edu[edu[i]] + a.age.edu[age[i],edu[i]] +#
+      a.state[state[i]]#
+  }"
+m_code <- '#
+#
+data {#
+	int n;#
+	int n.age;#
+	int n.edu;#
+	int n.state;#
+	int n.region;#
+	int y[n];#
+	vector[n] age;#
+	vector[n] edu;#
+	vector[n] state;#
+	vector[n] region;#
+	vector[n] female;#
+	vector[n] black;#
+#
+	}#
+parameters{#
+	real b.black;#
+	real b.female;#
+	real b.female.black;#
+#
+	real a.age;#
+	real a.edu;#
+	real age.edu;#
+	real a.state;#
+	real a.region;#
+	real tau.age;#
+	real tau.edu#
+	real tau.age.edu;#
+	real tau.state;#
+	real tau.region;#
+	real sigma.age;#
+	real sigma.edu;#
+	real sigma.age.edu;#
+	real sigma.state#
+	read sigma.region;#
+	}		#
+model {#
+  	b.0 ~ dnorm (0, .0001);#
+	b.female ~ dnorm (0, .0001);#
+			  b.black ~ dnorm (0, .0001);#
+			  b.female.black ~ dnorm (0, .0001);#
+			  for (j in 1:n.age) {a.age[j] ~ dnorm(0, tau.age)};#
+			  for (j in 1:n.edu) {a.edu[j] ~ dnorm(0, tau.edu)};#
+			  for (j in 1:n.age) {for (k in 1:n.edu){#
+			    a.age.edu[j,k] ~ dnorm(0, tau.age.edu)}};#
+			  for (j in 1:n.state) {#
+			    a.state[j] ~ dnorm(a.state.hat[j], tau.state)#
+			    a.state.hat[j] <- a.region[region[j]] + b.v.prev*v.prev[j]};#
+			  b.v.prev ~ dnorm (0, .0001) ;#
+			  for (j in 1:n.region) {a.region[j] ~ dnorm(0, tau.region)};#
+			  tau.age <- pow(sigma.age, -2);#
+			  tau.edu <- pow(sigma.edu, -2);#
+			  tau.age.edu <- pow(sigma.age.edu, -2);#
+			  tau.state <- pow(sigma.state, -2);#
+			  tau.region <- pow(sigma.region, -2);#
+			  sigma.age ~ dunif (0, 100);#
+			  sigma.edu ~ dunif (0, 100);#
+			  sigma.age.edu ~ dunif (0, 100);#
+			  sigma.state ~ dunif (0, 100);#
+			  sigma.region ~ dunif (0, 100); #
+  for (i in 1:n){#
+    y[i] ~ dbin (p.bound[i], 1)#
+    p.bound[i] <- max(0, min(1, p[i]))#
+    logit(p[i]) <- Xbeta[i]#
+    Xbeta[i] <- b.0 + b.female*female[i] + b.black*black[i] +#
+      b.female.black*female[i]*black[i] +#
+      a.age[age[i]] + a.edu[edu[i]] + a.age.edu[age[i],edu[i]] +#
+      a.state[state[i]]#
+  }'
+fitM2 <- stan(model_code = m_code, data = m_data)
+m_code <- '#
+data {#
+	int n;#
+	int n_age;#
+	int n_edu;#
+	int n_state;#
+	int n_region;#
+	int y[n];#
+	vector[n] age;#
+	vector[n] edu;#
+	vector[n] state;#
+	vector[n] region;#
+	vector[n] female;#
+	vector[n] black;#
+#
+	}#
+parameters{#
+	real b.black;#
+	real b.female;#
+	real b.female.black;#
+#
+	real a_age;#
+	real a_edu;#
+	real age_edu;#
+	real a_state;#
+	real a_region;#
+	real tau_age;#
+	real tau_edu#
+	real tau_age_edu;#
+	real tau_state;#
+	real tau_region;#
+	real sigma_age;#
+	real sigma_edu;#
+	real sigma_age_edu;#
+	real sigma_state#
+	read sigma_region;#
+	}		#
+model {#
+  	b.0 ~ dnorm (0, .0001);#
+	b.female ~ dnorm (0, .0001);#
+			  b.black ~ dnorm (0, .0001);#
+			  b.female.black ~ dnorm (0, .0001);#
+			  for (j in 1:n_age) {a_age[j] ~ dnorm(0, tau_age)};#
+			  for (j in 1:n_edu) {a_edu[j] ~ dnorm(0, tau_edu)};#
+			  for (j in 1:n_age) {for (k in 1:n_edu){#
+			    a_age_edu[j,k] ~ dnorm(0, tau_age_edu)}};#
+			  for (j in 1:n_state) {#
+			    a_state[j] ~ dnorm(a_state.hat[j], tau_state)#
+			    a_state.hat[j] <- a_region[region[j]] + b.v.prev*v.prev[j]};#
+			  b.v.prev ~ dnorm (0, .0001) ;#
+			  for (j in 1:n_region) {a_region[j] ~ dnorm(0, tau_region)};#
+			  tau_age <- pow(sigma_age, -2);#
+			  tau_edu <- pow(sigma_edu, -2);#
+			  tau_age_edu <- pow(sigma_age_edu, -2);#
+			  tau_state <- pow(sigma_state, -2);#
+			  tau_region <- pow(sigma_region, -2);#
+			  sigma_age ~ dunif (0, 100);#
+			  sigma_edu ~ dunif (0, 100);#
+			  sigma_age_edu ~ dunif (0, 100);#
+			  sigma_state ~ dunif (0, 100);#
+			  sigma_region ~ dunif (0, 100); #
+  for (i in 1:n){#
+    y[i] ~ dbin (p.bound[i], 1)#
+    p.bound[i] <- max(0, min(1, p[i]))#
+    logit(p[i]) <- Xbeta[i]#
+    Xbeta[i] <- b.0 + b.female*female[i] + b.black*black[i] +#
+      b.female.black*female[i]*black[i] +#
+      a_age[age[i]] + a_edu[edu[i]] + a_age_edu[age[i],edu[i]] +#
+      a_state[state[i]]#
+  }'
+fitM2 <- stan(model_code = m_code, data = m_data)
+m_code <- '#
+data {#
+	int n;#
+	int n_age;#
+	int n_edu;#
+	int n_state;#
+	int n_region;#
+	int y[n];#
+	vector[n] age;#
+	vector[n] edu;#
+	vector[n] state;#
+	vector[n] region;#
+	vector[n] female;#
+	vector[n] black;#
+#
+	}#
+parameters{#
+	real b_black;#
+	real b_female;#
+	real b_female_black;#
+#
+	real a_age;#
+	real a_edu;#
+	real age_edu;#
+	real a_state;#
+	real a_region;#
+	real tau_age;#
+	real tau_edu#
+	real tau_age_edu;#
+	real tau_state;#
+	real tau_region;#
+	real sigma_age;#
+	real sigma_edu;#
+	real sigma_age_edu;#
+	real sigma_state#
+	read sigma_region;#
+	}		#
+model {#
+  	b.0 ~ dnorm (0, .0001);#
+	b_female ~ dnorm (0, .0001);#
+			  b_black ~ dnorm (0, .0001);#
+			  b_female_black ~ dnorm (0, .0001);#
+			  for (j in 1:n_age) {a_age[j] ~ dnorm(0, tau_age)};#
+			  for (j in 1:n_edu) {a_edu[j] ~ dnorm(0, tau_edu)};#
+			  for (j in 1:n_age) {for (k in 1:n_edu){#
+			    a_age_edu[j,k] ~ dnorm(0, tau_age_edu)}};#
+			  for (j in 1:n_state) {#
+			    a_state[j] ~ dnorm(a_state.hat[j], tau_state)#
+			    a_state.hat[j] <- a_region[region[j]] + b.v.prev*v.prev[j]};#
+			  b.v.prev ~ dnorm (0, .0001) ;#
+			  for (j in 1:n_region) {a_region[j] ~ dnorm(0, tau_region)};#
+			  tau_age <- pow(sigma_age, -2);#
+			  tau_edu <- pow(sigma_edu, -2);#
+			  tau_age_edu <- pow(sigma_age_edu, -2);#
+			  tau_state <- pow(sigma_state, -2);#
+			  tau_region <- pow(sigma_region, -2);#
+			  sigma_age ~ dunif (0, 100);#
+			  sigma_edu ~ dunif (0, 100);#
+			  sigma_age_edu ~ dunif (0, 100);#
+			  sigma_state ~ dunif (0, 100);#
+			  sigma_region ~ dunif (0, 100); #
+  for (i in 1:n){#
+    y[i] ~ dbin (p.bound[i], 1)#
+    p.bound[i] <- max(0, min(1, p[i]))#
+    logit(p[i]) <- Xbeta[i]#
+    Xbeta[i] <- b.0 + b_female*female[i] + b_black*black[i] +#
+      b_female_black*female[i]*black[i] +#
+      a_age[age[i]] + a_edu[edu[i]] + a_age_edu[age[i],edu[i]] +#
+      a_state[state[i]]#
+  }'
+fitM2 <- stan(model_code = m_code, data = m_data)
+m_code <- '#
+data {#
+	int n;#
+	int n_age;#
+	int n_edu;#
+	int n_state;#
+	int n_region;#
+	int y[n];#
+	vector[n] age;#
+	vector[n] edu;#
+	vector[n] state;#
+	vector[n] region;#
+	vector[n] female;#
+	vector[n] black;#
+#
+	}#
+parameters{#
+	real b_black;#
+	real b_female;#
+	real b_female_black;#
+#
+	real a_age;#
+	real a_edu;#
+	real age_edu;#
+	real a_state;#
+	real a_region;#
+	real tau_age;#
+	real tau_edu;#
+	real tau_age_edu;#
+	real tau_state;#
+	real tau_region;#
+	real sigma_age;#
+	real sigma_edu;#
+	real sigma_age_edu;#
+	real sigma_state#
+	read sigma_region;#
+	}		#
+model {#
+  	b.0 ~ dnorm (0, .0001);#
+	b_female ~ dnorm (0, .0001);#
+			  b_black ~ dnorm (0, .0001);#
+			  b_female_black ~ dnorm (0, .0001);#
+			  for (j in 1:n_age) {a_age[j] ~ dnorm(0, tau_age)};#
+			  for (j in 1:n_edu) {a_edu[j] ~ dnorm(0, tau_edu)};#
+			  for (j in 1:n_age) {for (k in 1:n_edu){#
+			    a_age_edu[j,k] ~ dnorm(0, tau_age_edu)}};#
+			  for (j in 1:n_state) {#
+			    a_state[j] ~ dnorm(a_state.hat[j], tau_state)#
+			    a_state.hat[j] <- a_region[region[j]] + b.v.prev*v.prev[j]};#
+			  b.v.prev ~ dnorm (0, .0001) ;#
+			  for (j in 1:n_region) {a_region[j] ~ dnorm(0, tau_region)};#
+			  tau_age <- pow(sigma_age, -2);#
+			  tau_edu <- pow(sigma_edu, -2);#
+			  tau_age_edu <- pow(sigma_age_edu, -2);#
+			  tau_state <- pow(sigma_state, -2);#
+			  tau_region <- pow(sigma_region, -2);#
+			  sigma_age ~ dunif (0, 100);#
+			  sigma_edu ~ dunif (0, 100);#
+			  sigma_age_edu ~ dunif (0, 100);#
+			  sigma_state ~ dunif (0, 100);#
+			  sigma_region ~ dunif (0, 100); #
+  for (i in 1:n){#
+    y[i] ~ dbin (p.bound[i], 1)#
+    p.bound[i] <- max(0, min(1, p[i]))#
+    logit(p[i]) <- Xbeta[i]#
+    Xbeta[i] <- b.0 + b_female*female[i] + b_black*black[i] +#
+      b_female_black*female[i]*black[i] +#
+      a_age[age[i]] + a_edu[edu[i]] + a_age_edu[age[i],edu[i]] +#
+      a_state[state[i]]#
+  }'#
+fitM2 <- stan(model_code = m_code, data = m_data)
+m_code <- '#
+data {#
+	int n;#
+	int n_age;#
+	int n_edu;#
+	int n_state;#
+	int n_region;#
+	int y[n];#
+	vector[n] age;#
+	vector[n] edu;#
+	vector[n] state;#
+	vector[n] region;#
+	vector[n] female;#
+	vector[n] black;#
+#
+	}#
+parameters{#
+	real b_black;#
+	real b_female;#
+	real b_female_black;#
+#
+	real a_age;#
+	real a_edu;#
+	real age_edu;#
+	real a_state;#
+	real a_region;#
+	real tau_age;#
+	real tau_edu;#
+	real tau_age_edu;#
+	real tau_state;#
+	real tau_region;#
+	real sigma_age;#
+	real sigma_edu;#
+	real sigma_age_edu;#
+	real sigma_state#
+	read sigma_region;#
+	}		#
+model {#
+  	b.0 ~ dnorm (0, .0001);#
+	b_female ~ dnorm (0, .0001);#
+			  b_black ~ dnorm (0, .0001);#
+			  b_female_black ~ dnorm (0, .0001);#
+			  for (j in 1:n_age) {a_age[j] ~ dnorm(0, tau_age)};#
+			  for (j in 1:n_edu) {a_edu[j] ~ dnorm(0, tau_edu)};#
+			  for (j in 1:n_age) {for (k in 1:n_edu){#
+			    a_age_edu[j,k] ~ dnorm(0, tau_age_edu)}};#
+			  for (j in 1:n_state) {#
+			    a_state[j] ~ dnorm(a_state.hat[j], tau_state)#
+			    a_state.hat[j] <- a_region[region[j]] + b.v.prev*v.prev[j]};#
+			  b.v.prev ~ dnorm (0, .0001) ;#
+			  for (j in 1:n_region) {a_region[j] ~ dnorm(0, tau_region)};#
+			  tau_age <- pow(sigma_age, -2);#
+			  tau_edu <- pow(sigma_edu, -2);#
+			  tau_age_edu <- pow(sigma_age_edu, -2);#
+			  tau_state <- pow(sigma_state, -2);#
+			  tau_region <- pow(sigma_region, -2);#
+			  sigma_age ~ dunif (0, 100);#
+			  sigma_edu ~ dunif (0, 100);#
+			  sigma_age_edu ~ dunif (0, 100);#
+			  sigma_state ~ dunif (0, 100);#
+			  sigma_region ~ dunif (0, 100); #
+  for (i in 1:n){#
+    y[i] ~ dbin (p.bound[i], 1)#
+    p.bound[i] <- max(0, min(1, p[i]))#
+    logit(p[i]) <- Xbeta[i]#
+    Xbeta[i] <- b.0 + b_female*female[i] + b_black*black[i] +#
+      b_female_black*female[i]*black[i] +#
+      a_age[age[i]] + a_edu[edu[i]] + a_age_edu[age[i],edu[i]] +#
+      a_state[state[i]]#
+  }'#
+fitM2 <- stan(model_code = m_code, data = m_data)
+m_code <- '#
+data {#
+	int n;#
+	int n_age;#
+	int n_edu;#
+	int n_state;#
+	int n_region;#
+	int y[n];#
+	vector[n] age;#
+	vector[n] edu;#
+	vector[n] state;#
+	vector[n] region;#
+	vector[n] female;#
+	vector[n] black;#
+#
+	}#
+parameters{#
+	real b_black;#
+	real b_female;#
+	real b_female_black;#
+#
+	real a_age;#
+	real a_edu;#
+	real age_edu;#
+	real a_state;#
+	real a_region;#
+	real tau_age;#
+	real tau_edu;#
+	real tau_age_edu;#
+	real tau_state;#
+	real tau_region;#
+	real sigma_age;#
+	real sigma_edu;#
+	real sigma_age_edu;#
+	real sigma_state;#
+	read sigma_region;#
+	}		#
+model {#
+  	b.0 ~ dnorm (0, .0001);#
+	b_female ~ dnorm (0, .0001);#
+			  b_black ~ dnorm (0, .0001);#
+			  b_female_black ~ dnorm (0, .0001);#
+			  for (j in 1:n_age) {a_age[j] ~ dnorm(0, tau_age)};#
+			  for (j in 1:n_edu) {a_edu[j] ~ dnorm(0, tau_edu)};#
+			  for (j in 1:n_age) {for (k in 1:n_edu){#
+			    a_age_edu[j,k] ~ dnorm(0, tau_age_edu)}};#
+			  for (j in 1:n_state) {#
+			    a_state[j] ~ dnorm(a_state.hat[j], tau_state)#
+			    a_state.hat[j] <- a_region[region[j]] + b.v.prev*v.prev[j]};#
+			  b.v.prev ~ dnorm (0, .0001) ;#
+			  for (j in 1:n_region) {a_region[j] ~ dnorm(0, tau_region)};#
+			  tau_age <- pow(sigma_age, -2);#
+			  tau_edu <- pow(sigma_edu, -2);#
+			  tau_age_edu <- pow(sigma_age_edu, -2);#
+			  tau_state <- pow(sigma_state, -2);#
+			  tau_region <- pow(sigma_region, -2);#
+			  sigma_age ~ dunif (0, 100);#
+			  sigma_edu ~ dunif (0, 100);#
+			  sigma_age_edu ~ dunif (0, 100);#
+			  sigma_state ~ dunif (0, 100);#
+			  sigma_region ~ dunif (0, 100); #
+  for (i in 1:n){#
+    y[i] ~ dbin (p.bound[i], 1);#
+    p.bound[i] <- max(0, min(1, p[i]));#
+    logit(p[i]) <- Xbeta[i];#
+    Xbeta[i] <- b.0 + b_female*female[i] + b_black*black[i] +#
+      b_female_black*female[i]*black[i] +#
+      a_age[age[i]] + a_edu[edu[i]] + a_age_edu[age[i],edu[i]] +#
+      a_state[state[i]];#
+  }'#
+fitM2 <- stan(model_code = m_code, data = m_data)
+m_code <- '#
+data {#
+	int n;#
+	int n_age;#
+	int n_edu;#
+	int n_state;#
+	int n_region;#
+	int y[n];#
+	vector[n] age;#
+	vector[n] edu;#
+	vector[n] state;#
+	vector[n] region;#
+	vector[n] female;#
+	vector[n] black;#
+#
+	}#
+parameters{#
+	real b_black;#
+	real b_female;#
+	real b_female_black;#
+#
+	real a_age;#
+	real a_edu;#
+	real age_edu;#
+	real a_state;#
+	real a_region;#
+	real tau_age;#
+	real tau_edu;#
+	real tau_age_edu;#
+	real tau_state;#
+	real tau_region;#
+	real sigma_age;#
+	real sigma_edu;#
+	real sigma_age_edu;#
+	real sigma_state;#
+	read sigma_region;#
+	}		#
+model {#
+  	b.0 ~ dnorm (0, .0001);#
+	b_female ~ dnorm (0, .0001);#
+			  b_black ~ dnorm (0, .0001);#
+			  b_female_black ~ dnorm (0, .0001);#
+			  for (j in 1:n_age) {a_age[j] ~ dnorm(0, tau_age)};#
+			  for (j in 1:n_edu) {a_edu[j] ~ dnorm(0, tau_edu)};#
+			  for (j in 1:n_age) {for (k in 1:n_edu){#
+			    a_age_edu[j,k] ~ dnorm(0, tau_age_edu)}};#
+			  for (j in 1:n_state) {#
+			    a_state[j] ~ dnorm(a_state.hat[j], tau_state)#
+			    a_state.hat[j] <- a_region[region[j]] + b.v.prev*v.prev[j]};#
+			  b.v.prev ~ dnorm (0, .0001) ;#
+			  for (j in 1:n_region) {a_region[j] ~ dnorm(0, tau_region)};#
+			  tau_age <- pow(sigma_age, -2);#
+			  tau_edu <- pow(sigma_edu, -2);#
+			  tau_age_edu <- pow(sigma_age_edu, -2);#
+			  tau_state <- pow(sigma_state, -2);#
+			  tau_region <- pow(sigma_region, -2);#
+			  sigma_age ~ dunif (0, 100);#
+			  sigma_edu ~ dunif (0, 100);#
+			  sigma_age_edu ~ dunif (0, 100);#
+			  sigma_state ~ dunif (0, 100);#
+			  sigma_region ~ dunif (0, 100); #
+  for (i in 1:n){#
+    y[i] ~ dbin (p.bound[i], 1);#
+    p.bound[i] <- max(0, min(1, p[i]));#
+    logit(p[i]) <- Xbeta[i];#
+    Xbeta[i] <- b.0 + b_female*female[i] + b_black*black[i] +#
+      b_female_black*female[i]*black[i] +#
+      a_age[age[i]] + a_edu[edu[i]] + a_age_edu[age[i],edu[i]] +#
+      a_state[state[i]];#
+  }'#
+fitM2 <- stan(model_code = m_code, data = m_data)
+m_code <- '#
+data {#
+	int n;#
+	int n_age;#
+	int n_edu;#
+	int n_state;#
+	int n_region;#
+	int y[n];#
+	vector[n] age;#
+	vector[n] edu;#
+	vector[n] state;#
+	vector[n] region;#
+	vector[n] female;#
+	vector[n] black;#
+#
+	}#
+parameters{#
+	real b_black;#
+	real b_female;#
+	real b_female_black;#
+#
+	real a_age;#
+	real a_edu;#
+	real age_edu;#
+	real a_state;#
+	real a_region;#
+	real tau_age;#
+	real tau_edu;#
+	real tau_age_edu;#
+	real tau_state;#
+	real tau_region;#
+	real sigma_age;#
+	real sigma_edu;#
+	real sigma_age_edu;#
+	real sigma_state;#
+	real sigma_region;#
+	}		#
+model {#
+  	b.0 ~ dnorm (0, .0001);#
+	b_female ~ dnorm (0, .0001);#
+			  b_black ~ dnorm (0, .0001);#
+			  b_female_black ~ dnorm (0, .0001);#
+			  for (j in 1:n_age) {a_age[j] ~ dnorm(0, tau_age)};#
+			  for (j in 1:n_edu) {a_edu[j] ~ dnorm(0, tau_edu)};#
+			  for (j in 1:n_age) {for (k in 1:n_edu){#
+			    a_age_edu[j,k] ~ dnorm(0, tau_age_edu)}};#
+			  for (j in 1:n_state) {#
+			    a_state[j] ~ dnorm(a_state.hat[j], tau_state)#
+			    a_state.hat[j] <- a_region[region[j]] + b.v.prev*v.prev[j]};#
+			  b.v.prev ~ dnorm (0, .0001) ;#
+			  for (j in 1:n_region) {a_region[j] ~ dnorm(0, tau_region)};#
+			  tau_age <- pow(sigma_age, -2);#
+			  tau_edu <- pow(sigma_edu, -2);#
+			  tau_age_edu <- pow(sigma_age_edu, -2);#
+			  tau_state <- pow(sigma_state, -2);#
+			  tau_region <- pow(sigma_region, -2);#
+			  sigma_age ~ dunif (0, 100);#
+			  sigma_edu ~ dunif (0, 100);#
+			  sigma_age_edu ~ dunif (0, 100);#
+			  sigma_state ~ dunif (0, 100);#
+			  sigma_region ~ dunif (0, 100); #
+  for (i in 1:n){#
+    y[i] ~ dbin (p.bound[i], 1);#
+    p.bound[i] <- max(0, min(1, p[i]));#
+    logit(p[i]) <- Xbeta[i];#
+    Xbeta[i] <- b.0 + b_female*female[i] + b_black*black[i] +#
+      b_female_black*female[i]*black[i] +#
+      a_age[age[i]] + a_edu[edu[i]] + a_age_edu[age[i],edu[i]] +#
+      a_state[state[i]];#
+  }'#
+fitM2 <- stan(model_code = m_code, data = m_data)
+m_code <- '#
+data {#
+	int n;#
+	int n_age;#
+	int n_edu;#
+	int n_state;#
+	int n_region;#
+	int y[n];#
+	vector[n] age;#
+	vector[n] edu;#
+	vector[n] state;#
+	vector[n] region;#
+	vector[n] female;#
+	vector[n] black;#
+#
+	}#
+parameters{#
+	real b_black;#
+	real b_female;#
+	real b_female_black;#
+#
+	real a_age;#
+	real a_edu;#
+	real age_edu;#
+	real a_state;#
+	real a_region;#
+	real tau_age;#
+	real tau_edu;#
+	real tau_age_edu;#
+	real tau_state;#
+	real tau_region;#
+	real sigma_age;#
+	real sigma_edu;#
+	real sigma_age_edu;#
+	real sigma_state;#
+	real sigma_region;#
+	}		#
+model {#
+  	b_0 ~ dnorm (0, .0001);#
+	b_female ~ dnorm (0, .0001);#
+			  b_black ~ dnorm (0, .0001);#
+			  b_female_black ~ dnorm (0, .0001);#
+			  for (j in 1:n_age) {a_age[j] ~ dnorm(0, tau_age)};#
+			  for (j in 1:n_edu) {a_edu[j] ~ dnorm(0, tau_edu)};#
+			  for (j in 1:n_age) {for (k in 1:n_edu){#
+			    a_age_edu[j,k] ~ dnorm(0, tau_age_edu)}};#
+			  for (j in 1:n_state) {#
+			    a_state[j] ~ dnorm(a_state.hat[j], tau_state)#
+			    a_state.hat[j] <- a_region[region[j]] + b.v.prev*v.prev[j]};#
+			  b.v.prev ~ dnorm (0, .0001) ;#
+			  for (j in 1:n_region) {a_region[j] ~ dnorm(0, tau_region)};#
+			  tau_age <- pow(sigma_age, -2);#
+			  tau_edu <- pow(sigma_edu, -2);#
+			  tau_age_edu <- pow(sigma_age_edu, -2);#
+			  tau_state <- pow(sigma_state, -2);#
+			  tau_region <- pow(sigma_region, -2);#
+			  sigma_age ~ dunif (0, 100);#
+			  sigma_edu ~ dunif (0, 100);#
+			  sigma_age_edu ~ dunif (0, 100);#
+			  sigma_state ~ dunif (0, 100);#
+			  sigma_region ~ dunif (0, 100); #
+  for (i in 1:n){#
+    y[i] ~ dbin (p.bound[i], 1);#
+    p.bound[i] <- max(0, min(1, p[i]));#
+    logit(p[i]) <- Xbeta[i];#
+    Xbeta[i] <- b_0 + b_female*female[i] + b_black*black[i] +#
+      b_female_black*female[i]*black[i] +#
+      a_age[age[i]] + a_edu[edu[i]] + a_age_edu[age[i],edu[i]] +#
+      a_state[state[i]];#
+  }'#
+fitM2 <- stan(model_code = m_code, data = m_data)
+m_code <- '#
+data {#
+	int n;#
+	int n_age;#
+	int n_edu;#
+	int n_state;#
+	int n_region;#
+	int y[n];#
+	vector[n] age;#
+	vector[n] edu;#
+	vector[n] state;#
+	vector[n] region;#
+	vector[n] female;#
+	vector[n] black;#
+#
+	}#
+parameters{#
+	real b_0;#
+	real b_black;#
+	real b_female;#
+	real b_female_black;#
+#
+	real a_age;#
+	real a_edu;#
+	real age_edu;#
+	real a_state;#
+	real a_region;#
+	real tau_age;#
+	real tau_edu;#
+	real tau_age_edu;#
+	real tau_state;#
+	real tau_region;#
+	real sigma_age;#
+	real sigma_edu;#
+	real sigma_age_edu;#
+	real sigma_state;#
+	real sigma_region;#
+	}		#
+model {#
+  	b_0 ~ dnorm (0, .0001);#
+	b_female ~ dnorm (0, .0001);#
+			  b_black ~ dnorm (0, .0001);#
+			  b_female_black ~ dnorm (0, .0001);#
+			  for (j in 1:n_age) {a_age[j] ~ dnorm(0, tau_age)};#
+			  for (j in 1:n_edu) {a_edu[j] ~ dnorm(0, tau_edu)};#
+			  for (j in 1:n_age) {for (k in 1:n_edu){#
+			    a_age_edu[j,k] ~ dnorm(0, tau_age_edu)}};#
+			  for (j in 1:n_state) {#
+			    a_state[j] ~ dnorm(a_state.hat[j], tau_state)#
+			    a_state.hat[j] <- a_region[region[j]] + b.v.prev*v.prev[j]};#
+			  b.v.prev ~ dnorm (0, .0001) ;#
+			  for (j in 1:n_region) {a_region[j] ~ dnorm(0, tau_region)};#
+			  tau_age <- pow(sigma_age, -2);#
+			  tau_edu <- pow(sigma_edu, -2);#
+			  tau_age_edu <- pow(sigma_age_edu, -2);#
+			  tau_state <- pow(sigma_state, -2);#
+			  tau_region <- pow(sigma_region, -2);#
+			  sigma_age ~ dunif (0, 100);#
+			  sigma_edu ~ dunif (0, 100);#
+			  sigma_age_edu ~ dunif (0, 100);#
+			  sigma_state ~ dunif (0, 100);#
+			  sigma_region ~ dunif (0, 100); #
+  for (i in 1:n){#
+    y[i] ~ dbin (p.bound[i], 1);#
+    p.bound[i] <- max(0, min(1, p[i]));#
+    logit(p[i]) <- Xbeta[i];#
+    Xbeta[i] <- b_0 + b_female*female[i] + b_black*black[i] +#
+      b_female_black*female[i]*black[i] +#
+      a_age[age[i]] + a_edu[edu[i]] + a_age_edu[age[i],edu[i]] +#
+      a_state[state[i]];#
+  }'#
+fitM2 <- stan(model_code = m_code, data = m_data)
+m_code <- '#
+data {#
+	int n;#
+	int n_age;#
+	int n_edu;#
+	int n_state;#
+	int n_region;#
+	int y[n];#
+	vector[n] age;#
+	vector[n] edu;#
+	vector[n] state;#
+	vector[n] region;#
+	vector[n] female;#
+	vector[n] black;#
+#
+	}#
+parameters{#
+	real b_0;#
+	real b_black;#
+	real b_female;#
+	real b_female_black;#
+#
+	real a_age;#
+	real a_edu;#
+	real age_edu;#
+	real a_state;#
+	real a_region;#
+	real tau_age;#
+	real tau_edu;#
+	real tau_age_edu;#
+	real tau_state;#
+	real tau_region;#
+	real sigma_age;#
+	real sigma_edu;#
+	real sigma_age_edu;#
+	real sigma_state;#
+	real sigma_region;#
+	}		#
+model {#
+  	b_0 ~ normal (0, .0001);#
+	b_female ~ normal(0, .0001);#
+	b_black ~ normal (0, .0001);#
+	b_female_black ~ normal (0, .0001);#
+			  for (j in 1:n_age) {a_age[j] ~ normal(0, tau_age)};#
+			  for (j in 1:n_edu) {a_edu[j] ~ normal(0, tau_edu)};#
+			  for (j in 1:n_age) {for (k in 1:n_edu){#
+			    a_age_edu[j,k] ~ normal(0, tau_age_edu)}};#
+			  for (j in 1:n_state) {#
+			    a_state[j] ~ normal(a_state.hat[j], tau_state)#
+			    a_state.hat[j] <- a_region[region[j]] + b.v.prev*v.prev[j]};#
+			  b.v.prev ~ normal (0, .0001) ;#
+			  for (j in 1:n_region) {a_region[j] ~ normal(0, tau_region)};#
+			  tau_age <- pow(sigma_age, -2);#
+			  tau_edu <- pow(sigma_edu, -2);#
+			  tau_age_edu <- pow(sigma_age_edu, -2);#
+			  tau_state <- pow(sigma_state, -2);#
+			  tau_region <- pow(sigma_region, -2);#
+			  sigma_age ~ dunif (0, 100);#
+			  sigma_edu ~ dunif (0, 100);#
+			  sigma_age_edu ~ dunif (0, 100);#
+			  sigma_state ~ dunif (0, 100);#
+			  sigma_region ~ dunif (0, 100); #
+  for (i in 1:n){#
+    y[i] ~ dbin (p.bound[i], 1);#
+    p.bound[i] <- max(0, min(1, p[i]));#
+    logit(p[i]) <- Xbeta[i];#
+    Xbeta[i] <- b_0 + b_female*female[i] + b_black*black[i] +#
+      b_female_black*female[i]*black[i] +#
+      a_age[age[i]] + a_edu[edu[i]] + a_age_edu[age[i],edu[i]] +#
+      a_state[state[i]];#
+  }'#
+fitM2 <- stan(model_code = m_code, data = m_data)
+m_data <- list(n = length(black),#
+			 n.age = max(age),#
+			 n.edu = max(edu),#
+			 n.state = max(state),#
+			 n.region = max(region),#
+			 y = y,#
+			 female = female,#
+			 black = black,#
+			 age = age,#
+			 edu = edu,#
+			 state = state)#
+#
+# Ns also go into the 'data' part of the _code#
+#
+m_code <- '#
+data {#
+	int n;#
+	int n_age;#
+	int n_edu;#
+	int n_state;#
+	int n_region;#
+	int y[n];#
+	vector[n] age;#
+	vector[n] edu;#
+	vector[n] state;#
+	vector[n] region;#
+	vector[n] female;#
+	vector[n] black;#
+#
+	}#
+parameters{#
+	real b_0;#
+	real b_black;#
+	real b_female;#
+	real b_female_black;#
+#
+	real a_age;#
+	real a_edu;#
+	real age_edu;#
+	real a_state;#
+	real a_region;#
+	real tau_age;#
+	real tau_edu;#
+	real tau_age_edu;#
+	real tau_state;#
+	real tau_region;#
+	real sigma_age;#
+	real sigma_edu;#
+	real sigma_age_edu;#
+	real sigma_state;#
+	real sigma_region;#
+	}		#
+model {#
+  	b_0 ~ normal (0, .0001);#
+	b_female ~ normal(0, .0001);#
+	b_black ~ normal(0, .0001);#
+	b_female_black ~ normal (0, .0001);#
+			  for (j in 1:n_age) {a_age[j] ~ normal(0, tau_age)};#
+			  for (j in 1:n_edu) {a_edu[j] ~ normal(0, tau_edu)};#
+			  for (j in 1:n_age) {for (k in 1:n_edu){#
+			    a_age_edu[j,k] ~ normal(0, tau_age_edu)}};#
+			  for (j in 1:n_state) {#
+			    a_state[j] ~ normal(a_state.hat[j], tau_state)#
+			    a_state.hat[j] <- a_region[region[j]] + b.v.prev*v.prev[j]};#
+			  b.v.prev ~ normal (0, .0001) ;#
+			  for (j in 1:n_region) {a_region[j] ~ normal(0, tau_region)};#
+			  tau_age <- pow(sigma_age, -2);#
+			  tau_edu <- pow(sigma_edu, -2);#
+			  tau_age_edu <- pow(sigma_age_edu, -2);#
+			  tau_state <- pow(sigma_state, -2);#
+			  tau_region <- pow(sigma_region, -2);#
+			  sigma_age ~ dunif (0, 100);#
+			  sigma_edu ~ dunif (0, 100);#
+			  sigma_age_edu ~ dunif (0, 100);#
+			  sigma_state ~ dunif (0, 100);#
+			  sigma_region ~ dunif (0, 100); #
+  for (i in 1:n){#
+    y[i] ~ dbin (p.bound[i], 1);#
+    p.bound[i] <- max(0, min(1, p[i]));#
+    logit(p[i]) <- Xbeta[i];#
+    Xbeta[i] <- b_0 + b_female*female[i] + b_black*black[i] +#
+      b_female_black*female[i]*black[i] +#
+      a_age[age[i]] + a_edu[edu[i]] + a_age_edu[age[i],edu[i]] +#
+      a_state[state[i]];#
+  }'#
+fitM2 <- stan(model_code = m_code, data = m_data)
