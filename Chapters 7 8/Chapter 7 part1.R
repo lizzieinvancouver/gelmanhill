@@ -73,7 +73,7 @@ lines(density(avg.height), col = "blue", lwd = 2) # Adding density line , altern
 
 setwd("~/Documents/H/gelmanhill") # DF
 
-source('Book_Codes/Ch.4/4.4_Log transformations.R', chdir = TRUE)
+source('Book_Codes/Ch.4/4.4_Log transformations.R', chdir = T)
 ## Simulation to represent predictive uncertainty
 
  # Model of log earnings with interactions
@@ -84,7 +84,7 @@ display (earn.logmodel.3)
  # Prediction - given this model, what is the predicted earning of a 68" male?
 
 x.new <- data.frame (height=68, male=1)
-( pred.interval <- predict (earn.logmodel.3, x.new, interval="prediction", level=.95) )
+( pred.interval <- predict(earn.logmodel.3, x.new, interval="prediction", level=.95) )
 # 8.4 + 0.017*68 - 0.0786 *1 + 0.007447 * 68 * 1
 # intercept + slope*inches + slope_male * yes,male + interaction height_male * inches * yes,male
 # residual standard error: 

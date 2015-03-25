@@ -79,7 +79,7 @@ roachdata <- read.csv ("ARM_Data/roaches/roachdata.csv")
 attach.all (roachdata)
 
 ## Fit the model
-# Offset review??
+# Offset: makes differen 
 
 glm.1 <- glm (y ~ roach1 + treatment + senior, family=poisson,
   offset=log(exposure2))

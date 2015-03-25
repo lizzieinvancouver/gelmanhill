@@ -2,6 +2,7 @@
 # Data are at http://www.stat.columbia.edu/~gelman/arm/examples/simulation
 
 # DF edit
+setwd("~/Documents/H/gelmanhill")
 
 library ("arm")
 

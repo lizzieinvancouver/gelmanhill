@@ -14,7 +14,7 @@ shots <- function(){
 	
 simz <- replicate(1000, shots())
 mean(simz); sd(simz)
-hist(simz) # exponential..
+hist(simz) # Poisson: time until an event
 
 # 2. continuous simulation
 

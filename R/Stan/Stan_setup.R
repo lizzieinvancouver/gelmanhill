@@ -9,7 +9,7 @@
 library(rstan)
 
 # setwd to Stan
-# setwd("~/Dropbox/Work/Harvard/Wolkovich Lab/gelmanhill/R/Stan")
+# setwd("~/Dropbox/Work/Harvard/Wolkovich Lab/Gelman_Hill/Stan")
 
 # 8schools from Gelman 2003 Ch 5
 schools_dat <- list(J = 8, 
@@ -18,6 +18,8 @@ schools_dat <- list(J = 8,
 
 fit <- stan(file = '8schools.stan', data = schools_dat, 
             iter = 1000, chains = 4)
+
+# crashes when compiling C++ code??? Updated Rcpp package, still crashes
 
 # 
 # This is a demo of using model_code argument since 
