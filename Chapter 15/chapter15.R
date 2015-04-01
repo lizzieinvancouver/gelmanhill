@@ -26,9 +26,16 @@ elecsurvey2K$income <-  revalue(elecsurvey2K$income,
     c("0. dk/ na/ refused to answer/ inap, no p"="NA", "1. 0 to 16 percentile"=1,
     "2. 17 to 33 percentile"=2, "3. 34 to 67 percentile"=3,
     "4. 68 to 95 percentile"=4, "5. 96 to 100 percentile"=5))
+# model we want is vote intention (yes/no) ~ income (1-5, ordinal) + varying intercepts for state
+
+# Andrew said when learning to cook you:
+# (1) Buy prepared foods first and cook them
+# (2) Use recipes to make food
+# (3) Cook from scratch because you know what you're doing
+# I think he is trying to say that we're at # 2 at most, but I have not found a recipe ...
 
 # okay, back to STAN ... #
-stop("still working on the below  ... ")
+stop("still working on the below  ... and it should be in a .stan file anyway")
 
 data {
 int<lower=1> income; // 
