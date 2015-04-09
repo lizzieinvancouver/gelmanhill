@@ -19,7 +19,7 @@ radon.2.sf <- stan(file="Chapter 16/radon.2.stan", data=radon.data, iter=1000,
     chains=4)
 
 # DF: equivalent in lmer (I think)
-radon.lmer <- lmer (y ~ x + u + (1 | county))
+# radon.lmer <- lmer (y ~ x + u + (1 | county))
 
 # The above runs
 # ... so now I should go back to my problem at hand #

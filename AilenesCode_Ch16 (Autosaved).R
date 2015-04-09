@@ -4,7 +4,7 @@
 library(Rcpp)
 library(inline)
 library(rstan)
-source(“http://mc-stan.org/rstan/stan.R”)
+source("http://mc-stan.org/rstan/stan.R")
 setwd("~/Documents/GitLatexStuff/GelmanHillR")
 ###First, I'll work through the first example in the R vignette:
 #Prepare the data:
