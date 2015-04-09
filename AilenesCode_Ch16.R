@@ -70,7 +70,7 @@ summary(lm.unpooled)
 radon.data <- c("N", "J", "y", "x", "county")
 
 # with 10 iterations
-radon.1.sf <- stan(file='radon.1.stan', data=radon.data, iter = 10, chains=4)
+radon.1.sf <- stan(file='Chapter 16/radon.1.stan', data=radon.data, iter = 10, chains=4)
 print(radon.1.sf) # to display the results in the R console, #Rhat really high in all cases, so try more iterations
 # with 500 iterations
 radon.1.sf <- stan(file='radon.1.stan', data=radon.data, iter = 500, chains=4)
