@@ -4,7 +4,7 @@
 library(foreign) # need for reading dta data
 library(plyr) # for relabeling values
 library(rstan) # being hopeful!
-# library(arm)
+library(arm)
 
 # get the election data from 2000 #
 elecsurvey <- read.dta("ARM_Data/nes/nes5200_processed_voters_realideo.dta")
@@ -17,6 +17,9 @@ source("ARM_data/radon/radon.data.R", echo = TRUE)
 radon.data <- c("N", "J", "y", "x", "county", "u")
 radon.2.sf <- stan(file="Chapter 16/radon.2.stan", data=radon.data, iter=1000,
     chains=4)
+
+# DF: equivalent in lmer (I think)
+radon.lmer <- lmer (y ~ x + u + (1 | county))
 
 # The above runs
 # ... so now I should go back to my problem at hand #

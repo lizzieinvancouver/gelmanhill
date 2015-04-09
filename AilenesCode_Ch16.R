@@ -12,17 +12,20 @@ y <- c(28, 8, -3, 7, -1, 1, 18, 12)
 sigma <- c(15, 10, 16, 11, 9, 11, 10, 18)
 schools_data_nms <- c("J", "y", "sigma")
 #draw posterior samples:
-fit1 <- stan(file="8schools.stan", data=schools_data_nms, iter=100, chains=4)
+fit1 <- stan(file="R/Stan/8schools.stan", data=schools_data_nms, iter=100, chains=4)
 print(fit1, pars=c("theta", "mu", "tau", "lp__"),probs=c(.1,.5,.9))
 plot(fit1)
 #####My attempt at exercise 3 from  Chapter 16
 #3a. Write a model predicting CD4 percentage as a function of time with varying intercepts across children , using lmer (from exercise 12.2)
 head(cd4dat)
 library(lme4)
+
+# DF: cd4dat <- read.csv("ARM_Data/cd4/allvar.csv")
 cd4dat=read.csv("allvar.csv", header=T)
 dim(cd4dat);head(cd4dat);summary(cd4dat)
 cd4dat$y <- sqrt (cd4dat$CD4PCT)
 cd4dat$time <- cd4dat$visage - cd4dat$baseage
+
 multilevmod1=lmer(y~time+(1|newpid), data=cd4dat)
 summary(multilevmod1)
 coef(multilevmod1)
@@ -44,12 +47,15 @@ id<-c(cd4dat$newpid)
 cd4_dat <- c("N", "J", "y", "x", "id")
 stanmod <- stan(file="cd4.stan", data=cd4_dat, iter=100, chains=4)##something is wrong with my 
 print(stanmod) 
+
 #in lmer, effect of time was -0.36609  ,in stand=-0.37; 
 ###below are some of the examples from the chapter in gelman & hill
 ##downloaded the files from stan ch 16 github
+
 library(ggplot2)
 ## Data
 source("radon.data.R", echo = TRUE)
+
 ## Classical complete pooling regression of radon levels, as a function of floor of measurement
 lm.pooled <- lm (y ~ x)
 summary(lm.pooled)
