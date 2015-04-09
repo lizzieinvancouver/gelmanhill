@@ -54,7 +54,7 @@ print(stanmod)
 
 library(ggplot2)
 ## Data
-source("radon.data.R", echo = TRUE)
+source("ARM_Data/radon/radon.data.R", echo = TRUE)
 
 ## Classical complete pooling regression of radon levels, as a function of floor of measurement
 lm.pooled <- lm (y ~ x)
@@ -68,6 +68,7 @@ lm.unpooled <- lm (y ~ x + factor(county) - 1)
 summary(lm.unpooled)
 ## Call Stan from R
 radon.data <- c("N", "J", "y", "x", "county")
+
 # with 10 iterations
 radon.1.sf <- stan(file='radon.1.stan', data=radon.data, iter = 10, chains=4)
 print(radon.1.sf) # to display the results in the R console, #Rhat really high in all cases, so try more iterations
@@ -75,8 +76,11 @@ print(radon.1.sf) # to display the results in the R console, #Rhat really high i
 radon.1.sf <- stan(file='radon.1.stan', data=radon.data, iter = 500, chains=4)
 plot(radon.1.sf) # to get a plot similar to Figure 16.1; #much better- rhats pretty much all 1!
 print(radon.1.sf) # to display the results in the R console
+
+
 ## Summarizing classical and multilevel inferences graphically
 # choose countries
+
 display8 <- c(36, 1, 35, 21, 14, 71, 61, 70) # counties to be displayed
 radon.ggdf <- subset(data.frame(y, x, county), county %in% display8)
 radon.ggdf$county.name <- county_name[radon.ggdf$county]
