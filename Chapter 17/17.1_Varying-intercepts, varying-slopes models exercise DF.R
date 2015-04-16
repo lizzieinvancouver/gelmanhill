@@ -2,10 +2,13 @@ library(rstan)
 library(foreign)
 library(arm)
 
+
+setwd("~/Documents/H/gelmanhill/Chapter 17")
+
 # 1. presidential preferences
 # source('~/Dropbox/Work/Harvard/Wolkovich Lab/Gelman_Hill/Book_Codes/Ch.4/4.7_Fitting a series of regressions.R', chdir = TRUE)
  d <- read.dta("~/Dropbox/Work/Harvard/Wolkovich Lab/Gelman_Hill/ARM_Data/nes/nes5200_processed_voters_realideo.dta", convert.factors=F)
- 
+
 d <- d[is.na(d$black)==FALSE&is.na(d$female)==FALSE&is.na(d$educ1)==FALSE
 &is.na(d$age)==FALSE&is.na(d$income)==FALSE&is.na(d$state)==FALSE,]
 
@@ -39,10 +42,10 @@ female <- d.no.na$female
 race <- d.no.na$race
 edu <- d.no.na$educ1
 income <- d.no.na$income
-age <- d.no.na$age.discrete
+age <- as.numeric(d.no.na$age.discrete)
 state <- d.no.na$state
-J <- length(unique(state))
-
+#J <- length(unique(state)) # problem: this gives the actual number of groups
+J <- max(state) # this works, this gives the maximum number of the group identifier, which includes many groups which actually have no values
 # NES varying intercept and slope model, easy first
 dataList.0 <- list(N=length(y), y=y, state = state, J=J, ideo=ideo)
  
@@ -59,7 +62,7 @@ dataList.1 <- list(N=length(y), y=y, state=state, J=J, ideo=ideo, female = femal
 nes_vary_inter_slope <- stan(file='17.1_nes_DF.stan', data=dataList.1,
                             iter=100, chains=2)
 
-
+print(nes_vary_inter_slope)
 # radon correlation model
 radon_correlation.sf1 <- stan(file='17.1_radon_correlation.stan', data=dataList.1,
                             iter=100, chains=3)

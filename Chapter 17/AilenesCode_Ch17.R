@@ -88,5 +88,8 @@ y <-c(data2$partyid7 )#party identification (7 choices)- what distributtion whou
 x<-c(data2$real_ideo)
 st<-c(data2$state)
 nes_dat <- c("N", "J", "y", "x", "st")
-stanmod1 <- stan(file="17Ex1a.stan", data=nes_dat, iter=100, chains=4)##get error: stan::prob::normal_log(N4stan5agrad3varE): Scale parameter is 0:0, but must be > 0!
+#stanmod1 <- stan(file="17Ex1a.stan", data=nes_dat, iter=100, chains=4)##get 
+stanmod1 <- stan(file="~/Documents/H/gelmanhill/Chapter 17/17Ex1a.stan", data=nes_dat, iter=100, chains=4)##get 
+#error: stan::prob::normal_log(N4stan5agrad3varE): Scale parameter is 0:0, but must be > 0!
+
 print(stanmod1)
