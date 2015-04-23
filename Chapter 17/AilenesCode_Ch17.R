@@ -6,6 +6,7 @@ library(Rcpp)
 library(inline)
 library ("arm")
 library(foreign)
+
 ##set up a model for part identification (continuous outcome, as in section 4.7), given the predictors whon in figure 4.6 on page 74 and also allowing the intercept and the coefficient for ideology to vary by state. you 
 #first, look at model and rcode from ch 4:
 brdata <- read.dta("nes/nes5200_processed_voters_realideo.dta",convert.factors=F)
