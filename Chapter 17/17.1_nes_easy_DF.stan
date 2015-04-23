@@ -2,14 +2,16 @@ data {
   int<lower=0> N;
   int<lower=0> J;
   vector[N] y;
-  int<lower=1, upper=7> ideo[N];
-  int<lower=1, upper=73> state[N];
+  int<lower=1> ideo[N];
+  int<lower=1> state[N];
 }
+transformed data {
+  print(max(ido
 parameters {
   real<lower=0> sigma;
   real<lower=0> sigma_a;
   real<lower=0> sigma_b;
-  vector[J] a;
+  vector[J] a; 
   vector[J] b;
   real mu_a;
   real mu_b;
