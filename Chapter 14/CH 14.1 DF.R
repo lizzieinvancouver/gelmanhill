@@ -129,7 +129,7 @@ summary(M2)
 # <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 
 
-# Stan. First, try M2. No idea right way to do this. WOrking off of 
+# Stan. First, try M2. No idea right way to do this. Working off of 
 # http://stackoverflow.com/questions/26447512/how-to-run-a-robit-model-in-stan
 # http://data.princeton.edu/pop510/hospStan.html
 
@@ -147,7 +147,7 @@ m_data <- list(n = length(black),
 			 edu = edu,
 			 state = state)
 
-# Ns also go into the 'data' part of the _code
+# Ns also go into the 'data' part of the _code. Problem with indexing the multiple levels in stan; how to write this? 
 
 m_code <- '
 data {
