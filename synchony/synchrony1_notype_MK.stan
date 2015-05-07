@@ -8,13 +8,13 @@ data {
 parameters {
   vector[J] a;                          // the intercept for each species
   vector[J] b;                          // the slope for each species
-  real sigma_y;                         // measurement error, noise, etc.
+  real<lower=0> sigma_y;                // measurement error, noise, etc.
 
   // hyperparameters
   real mu_a;                            // mean intercept across species
-  real sigma_a;                         // variation of intercept among species
+  real<lower=0> sigma_a;                // variation of intercept among species
   real mu_b;                            // mean slope across species
-  real sigma_b;                         // variation of slope among species
+  real<lower=0> sigma_b;                // variation of slope among species
 
   // we could also model a and b as an array/vector of 2 items
   // vector[J] beta[2];
