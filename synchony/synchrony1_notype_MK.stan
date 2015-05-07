@@ -16,16 +16,23 @@ parameters {
   real mu_b;                            // mean slope across species
   real sigma_b;                         // variation of slope among species
 
+  // we could also model a and b as an array/vector of 2 items
+  // vector[J] beta[2];
+  // vector[2] mu_beta;
+  // vector[2] sigma_beta;
+
   // technically we should also be modeling the covariance of a and b
   // see stan-reference PDF pp 61-62 for how
 }
 model {
   real ypred[N];
   for (i in 1:N){
-    int j;
-    j <- species[i];
+    ypred[i] <- a[species[i]] + b[species[i]] * year[i];
 
-    ypred[i] <- a[j] + b[j] * year[i];
+    // this is equivalent to the above one-liner
+    // int j;
+    // j <- species[i];
+    // ypred[i] <- a[j] + b[j] * year[i];
   }
   y ~ normal(ypred, sigma_y);
   a ~ normal(mu_a, sigma_a);
