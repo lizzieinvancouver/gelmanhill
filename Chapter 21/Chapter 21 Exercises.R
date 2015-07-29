@@ -93,3 +93,13 @@ mo <- lmer(rating ~ (1 | judge) + (1 | pair), data = oly[oly$criterion == "Perfo
 
 # Superpopulation: variation among the modeled probability distribution
 
+
+# Now exercise 3, superpop and finite sd. Modified stan code to calculate finite populaiton sd.
+
+
+# radon varying intercept and slope model
+dataList.1 <- list(N=length(y), y=y, county=county, J=J, x=x)
+radon_vary_inter_slope.sf1 <- stan(file='Chapter 21/17.1_radon_vary_inter_slope_finite.stan', data=dataList.1,
+                                   iter=1000, chains=4)
+print(radon_vary_inter_slope.sf1)
+
