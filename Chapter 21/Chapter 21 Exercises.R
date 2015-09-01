@@ -99,7 +99,8 @@ mo <- lmer(rating ~ (1 | judge) + (1 | pair), data = oly[oly$criterion == "Perfo
 
 # radon varying intercept and slope model
 dataList.1 <- list(N=length(y), y=y, county=county, J=J, x=x)
-radon_vary_inter_slope.sf1 <- stan(file='Chapter 21/17.1_radon_vary_inter_slope_finite.stan', data=dataList.1,
+radon_vary_inter_slope.sf2 <- stan(file='Chapter 21/17.1_radon_vary_inter_slope_finite.stan', data=dataList.1,
                                    iter=1000, chains=4)
-print(radon_vary_inter_slope.sf1)
+print(radon_vary_inter_slope.sf2)
 
+summary(radon_vary_inter_slope.sf2)$summary[1:100,]

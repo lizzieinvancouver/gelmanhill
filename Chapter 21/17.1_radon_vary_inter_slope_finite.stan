@@ -26,7 +26,9 @@ real s_y;
 	e_y[i] <- y[i] - y_hat[i];
 	}
    
-
+   s_y <- sd(e_y);
+   s_a <- sd(a);
+   s_b <- sd(b);
    	
 }
 model {
@@ -36,9 +38,5 @@ model {
   a ~ normal(mu_a, sigma_a);
   b ~ normal(mu_b, sigma_b);
   y ~ normal(y_hat, sigma);
-
-   s_y <- sd(e_y);
-   s_a <- sd(a);
-   s_b <- sd(b);
    
 }
