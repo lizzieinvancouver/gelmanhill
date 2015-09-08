@@ -106,3 +106,74 @@ print(radon_vary_inter_slope.sf2)
 summary(radon_vary_inter_slope.sf2)$summary[1:100,]
 
 # Exercise 5
+
+# Well-switching from 14.2, rodent infestation from 14.3
+
+#
+
+setwd("~/Documents/H/gelmanhill/Chapter 21")
+source("wells.data.R", echo = TRUE)
+
+# background on p 87. Safe: below .5 mg / L arsenic. Distance to nearest safe well a strong predictor; high distance, less likely to swtich.
+
+data.list.1 <- list(N=N, switc=switc, dist=dist, arsenic=arsenic)
+wells_interaction.sf <- stan(file='wells_interaction.stan', data=data.list.1,
+                             iter=1000, chains=4)
+print(wells_interaction.sf, pars = c("beta", "lp__"))
+
+# Compare this to model 
+dist100 = dist/100
+
+glm (switc ~ dist100 + arsenic + dist100:arsenic, family=binomial(link="logit"))
+
+# adding village: need to go back to original data
+
+ars <- read.dta("../ARM_Data/arsenic/all.dta")
+# variable 'as' is the arsenic variable
+
+
+## where is the village variable?
+
+
+# for now, use avg pred comparisions from non-multilevel code, with results from wells_interactions.sf
+# beta1: overall intercept
+# beta2: distance100
+# beta3: arsenic (more arsenic, more likely to switch
+# beta4: interaction between distance and arsenic. 
+
+b <- colMeans(extract(wells_interaction.sf, "beta")$beta)
+invlogit <- function(x) plogis(x)
+
+# for distance to nearest safe well. 
+
+hi <- 1
+lo <- 0
+dist.delta <- invlogit(b[1] + b[2] * hi + b[3] * arsenic + b[4] * arsenic*dist100) -
+         invlogit(b[1] + b[2] * lo + b[3] * arsenic + b[4] * arsenic*dist100)
+
+
+
+# for arsenic 
+
+
+hi <- 1.0
+lo <- 0.5
+as.delta <- invlogit(b[1] + b[2] * dist100 + b[3] * hi + b[4] * arsenic*dist100) -
+         invlogit(b[1] + b[2] * dist100 + b[3] * lo + b[4] * arsenic*dist100)
+
+
+# summarize
+
+dist.m <- mean(dist.delta)
+dist.se <- sd(dist.delta)/sqrt(length(dist.delta)-1)
+
+as.m <- mean(as.delta)
+as.se <- sd(as.delta)/sqrt(length(as.delta)-1)
+
+
+plot(c(dist.m, as.m), 1:2, pch = 16, 
+	xlim = c(-1, 1),
+	yaxt= "n")
+abline(v=0, lty=3)
+arrows(dist.m-dist.se, dist.m, dist.m+dist.se, dist.m)
+arrows(as.m-as.se, as.m, as.m+as.se, as.m)
