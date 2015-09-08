@@ -79,7 +79,7 @@ summary(ml1)
 
 ########################################################
 
-# Winter Olympics data
+# Winter Olympics data - for exercise 2.
 
 # From Ch 11
 
@@ -104,3 +104,5 @@ radon_vary_inter_slope.sf2 <- stan(file='Chapter 21/17.1_radon_vary_inter_slope_
 print(radon_vary_inter_slope.sf2)
 
 summary(radon_vary_inter_slope.sf2)$summary[1:100,]
+
+# Exercise 5
