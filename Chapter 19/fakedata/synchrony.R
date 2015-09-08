@@ -44,17 +44,17 @@ dev.off()
 
 # Fit the model
 
-library("rstan")
-source("stan.R")
+library("rstan") 
+# source("stan.R") # DF this breaks my machine... 'forked core process..'
 
-fit_simple <- stan("synchrony_simple.stan", data=c("N","y","J","species","year","type"), iter=1000, chains=4)
+fit_simple <- stan("synchrony_simple.stan", data=c("N","y","J","species","year","type"), iter=100, chains=4)
 print(fit_simple)
 
 # Look at the results
 library("shinyStan")
 launch_shinystan(fit_simple)
 
-fit1 <- stan("synchrony1.stan", data=c("N","y","J","species","year","type"), iter=1000, chains=4)
+fit1 <- stan("synchrony1.stan", data=c("N","y","J","species","year","type"), iter=100, chains=4)
 print(fit1)
 launch_shinystan(fit1)
 

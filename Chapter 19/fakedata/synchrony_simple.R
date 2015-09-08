@@ -42,7 +42,7 @@ par(mar=c(3,3,1,1), mgp=c(1.5,.5,0), tck=-.01)
 plot(range(year), range(y), type="n", xlab="Year", ylab="Day of year", bty="l", main="Raw data (types 1 and 2 are blue and red)")
 for (j in 1:J)
   lines(year[species==j], y[species==j], col=colors[type[j]])
-dev.off()
+dev.off(); system('open raw1simple.pdf -a /Applications/Preview.app')
 
 # Fit the model
 

@@ -46,24 +46,6 @@ dataList.0 <- list(N=length(y), y=y, state = state, J=J, ideo=ideo)
 dataList.1 <- list(N=length(y), y=y, state=state, J=J, ideo=ideo, female = female, race = race, edu = edu, income = income, age = age)
 nes_vary_inter_slope <- stan(file='17.1_nes_DF.stan', data=dataList.1,#
                             iter=100, chains=2)
-nes_vary_inter_slope <- stan(file='17.1_nes_DF.stan', data=dataList.1,#
-                            iter=100, chains=2)
-nes_vary_inter_slope <- stan(file='17.1_nes_DF.stan', data=dataList.1,#
-                            iter=100, chains=2)
-nes_vary_inter_slope <- stan(file='17.1_nes_DF.stan', data=dataList.1,#
-                            iter=100, chains=2)
-nes_vary_inter_slope <- stan(file='17.1_nes_DF.stan', data=dataList.1,#
-                            iter=100, chains=2)
-nes_vary_inter_slope <- stan(file='17.1_nes_DF.stan', data=dataList.1,#
-                            iter=100, chains=2)
-nes_vary_inter_slope <- stan(file='17.1_nes_DF.stan', data=dataList.1,#
-                            iter=100, chains=2)
-nes_vary_inter_slope <- stan(file='17.1_nes_DF.stan', data=dataList.1,#
-                            iter=100, chains=2)
-nes_vary_inter_slope <- stan(file='17.1_nes_DF.stan', data=dataList.1,#
-                            iter=100, chains=2)
-nes_vary_inter_slope <- stan(file='17.1_nes_DF.stan', data=dataList.1,#
-                            iter=100, chains=2)
 age
 d$age
 age
