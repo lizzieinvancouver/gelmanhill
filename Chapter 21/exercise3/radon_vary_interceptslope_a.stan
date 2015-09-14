@@ -8,7 +8,7 @@ data {
 } 
 parameters {
   vector[J] a;
-  real b;
+  vector[J] b;
   vector[2] beta;
   real g_0;
   real g_1;
@@ -26,6 +26,7 @@ transformed parameters {
 
   for (i in 1:N)
     y_hat[i] <- a[county[i]] + x[i] * b[county[i]] * 100;
+
 }
 model {
   g_0 ~ normal(0, 1);
@@ -38,4 +39,17 @@ model {
 
   sigma_y ~ uniform(0, 100);
   y ~ normal(y_hat, sigma_y);
+}
+
+generated quantities { 
+// trying to get sd for finite population stuff in generated quantities
+// adapted from finite_populations.stan
+  real<lower=0> s_y;
+  real<lower=0> s_a;
+  real<lower=0> s_b;
+
+  //finite population sd
+  s_y <- sd(y);
+  s_a <- sd(a);
+  s_b <- sd(b);
 }

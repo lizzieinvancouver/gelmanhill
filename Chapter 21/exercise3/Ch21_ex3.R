@@ -26,7 +26,7 @@ for (i in 1:J){
   county[county.name==uniq[i]] <- i
 }
 
- # no predictors
+# no predictors
 ybarbar = mean(y)
 
 sample.size <- as.vector (table (county))
@@ -46,7 +46,7 @@ u <- log (uranium)
 u.full <- u[county]
 
 ## Fit the model
-
+# radon (our y variable) predicted by a linear model with x=floor and county as a modeled parameter, u=uraniam
 dataList.1 <- list(N=n,J=85,y=y,u=u,x=x,county=county)
 radon_vary_intercept_a.sf1 <- stan(file='radon_vary_intercept_a.stan',
                                    data=dataList.1, iter=1000, chains=4)
@@ -56,7 +56,67 @@ e.a <- colMeans(post$e_a)
 omega <- (sd(e.a)/mean(post$sigma_a))^2
 omega <- pmin (omega, 1)
 
-## Fit the model with varying slope (not running, arghh!)
+## Fit the model with varying slope 
 dataList.2 <- list(N=n,J=85,y=y,u=u,x=x,county=county)
-radon_vary_intercept_a.sf1 <- stan(file='radon_vary_interceptslope_a.stan',
-                                   data=dataList.1, iter=1000, chains=4)
+radonmod2 <- stan(file='radon_vary_interceptslope_a.stan',
+                                   data=dataList.2, iter=1000, chains=4)
+
+## What is the mean and 50% intervals for a and b?
+# hack to get output!
+qq<-summary(radonmod2)
+class(radonmod2) # gives the overall summary and then each of the four chains (I think)
+qq[[1]][,6]
+a.meanfromstan <- as.vector(qq[[1]][,1])[1:85]
+b.meanfromstan <- as.vector(qq[[1]][,1])[86:170]
+a.50fromstan <- as.vector(qq[[1]][,6])[1:85]
+b.50fromstan <- as.vector(qq[[1]][,6])[86:170]
+
+mean(a.meanfromstan) # 1.47
+mean(b.meanfromstan) # -1.64^-03
+mean(a.50fromstan) # 1.47
+mean(b.50fromstan) # -4.85^-4
+# Why is 50% interval so different from mean here but not below?
+
+## Extract finite slopes at 50% (in progress ...)
+# following (as best I can page 464 of Gelman & Hill)
+# adapting example:
+# s=J
+# a=a
+# u=b
+# n.sims=1000, n.sims is output from BUGS, cannot figure for sure what n.sims is!
+post2 <- extract(radonmod2)
+attach(post2)
+finite.slopes <- rep(NA, 1000) 
+for (J in 1:1000){
+    finite.pop <- lm (a[J,] ~ b)
+    finite.slopes[J] <- coef(finite.pop)["b"]
+}
+
+                     
+#########################
+## Slim to 10 counties ##
+#########################
+county10 <- county[which(county<11)]
+x10 <- x[which(county<11)]
+y10 <- y[which(county<11)]
+u10 <- u[1:10]
+
+dataList.3 <- list(N=length(county10),J=10,y=y10,u=u10,x=x10,county=county10)
+
+## Fit the model with varying slope 
+radonmod3 <- stan(file='radon_vary_interceptslope_a.stan',
+                                   data=dataList.3, iter=1000, chains=4)
+
+# hack to get output!
+pp<-summary(radonmod3)
+class(radonmod3) 
+pp[[1]][,6]
+a.meanfromstan <- as.vector(pp[[1]][,1])[1:10]
+b.meanfromstan <- as.vector(pp[[1]][,1])[11:20]
+a.50fromstan <- as.vector(pp[[1]][,6])[1:10]
+b.50fromstan <- as.vector(pp[[1]][,6])[11:20]
+
+mean(a.meanfromstan) # 1.40
+mean(b.meanfromstan) # -0.031
+mean(a.50fromstan) # 1.42
+mean(b.50fromstan) # -0.038
