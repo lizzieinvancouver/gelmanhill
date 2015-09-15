@@ -1,11 +1,11 @@
-# Chapter 21 Exercises
+# Chapter 21 Exercises, from Dan
 
 library(rstan)
 library(foreign)
 library(arm)
 
 # 1. radon model, how would parameter estimates change if sample size is a. 4x more houses measured, b. 4x more counties, same houses per county, c. 4x houses and 4x counties
-setwd("~/Documents/H/gelmanhill/")
+setwd("~/Documents/git/gelmanhill/")
 
 
 ################################################################################################################################
@@ -111,13 +111,17 @@ summary(radon_vary_inter_slope.sf2)$summary[1:100,]
 
 #
 
-setwd("~/Documents/H/gelmanhill/Chapter 21")
+setwd("~/Documents/git/gelmanhill/Chapter 21")
 source("wells.data.R", echo = TRUE)
 
 # background on p 87. Safe: below .5 mg / L arsenic. Distance to nearest safe well a strong predictor; high distance, less likely to swtich.
 
-data.list.1 <- list(N=N, switc=switc, dist=dist, arsenic=arsenic)
-wells_interaction.sf <- stan(file='wells_interaction.stan', data=data.list.1,
+# Adding a fake 'village' variable for purpose of the exercise
+
+village = sample(1:20, length(arsenic), replace = T)
+
+data.list.1 <- list(N=N, switc=switc, dist=dist, arsenic=arsenic, village = village, J = length(unique(village)))
+wells_interaction.sf <- stan(file='wells_interaction_village.stan', data=data.list.1,
                              iter=1000, chains=4)
 print(wells_interaction.sf, pars = c("beta", "lp__"))
 
