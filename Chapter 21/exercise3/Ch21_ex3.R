@@ -4,6 +4,7 @@
 ## Working off 21.6_SummarizingtheAmmountofPartialPooling.R from example-models/ARM repo on github ##
 
 # setwd("~/Documents/git/teaching/gelmanhill/Chapter 21/exercise3")
+# setwd("~/Documents/git/gelmanhill/Chapter 21/exercise3") # DF
 
 library(rstan)
 library(ggplot2)
@@ -47,6 +48,7 @@ u.full <- u[county]
 
 ## Fit the model
 # radon (our y variable) predicted by a linear model with x=floor and county as a modeled parameter, u=uraniam
+# DF: stan model not in directory
 dataList.1 <- list(N=n,J=85,y=y,u=u,x=x,county=county)
 radon_vary_intercept_a.sf1 <- stan(file='radon_vary_intercept_a.stan',
                                    data=dataList.1, iter=1000, chains=4)
@@ -61,20 +63,26 @@ dataList.2 <- list(N=n,J=85,y=y,u=u,x=x,county=county)
 radonmod2 <- stan(file='radon_vary_interceptslope_a.stan',
                                    data=dataList.2, iter=1000, chains=4)
 
+print(radonmod2,pars = c("a","b","sigma_y", "lp__"))
 ## What is the mean and 50% intervals for a and b?
 # hack to get output!
 qq<-summary(radonmod2)
 class(radonmod2) # gives the overall summary and then each of the four chains (I think)
 qq[[1]][,6]
 a.meanfromstan <- as.vector(qq[[1]][,1])[1:85]
-b.meanfromstan <- as.vector(qq[[1]][,1])[86:170]
+# alt: 
+as.numeric(qq$summary[grep("^a\\[", rownames(qq$summary)),1]) # or as.vector. use ^b\\[ for betas
+b.meanfromstan <- as.vector(qq[[1]][,1])[86:170] # these are a_hat, not b...
+as.numeric(qq$summary[grep("^b\\[", rownames(qq$summary)),1]) 
 a.50fromstan <- as.vector(qq[[1]][,6])[1:85]
+as.numeric(qq$summary[grep("^a\\[", rownames(qq$summary)),6])
 b.50fromstan <- as.vector(qq[[1]][,6])[86:170]
+as.numeric(qq$summary[grep("^b\\[", rownames(qq$summary)),6])
 
 mean(a.meanfromstan) # 1.47
 mean(b.meanfromstan) # -1.64^-03
 mean(a.50fromstan) # 1.47
-mean(b.50fromstan) # -4.85^-4
+mean(b.50fromstan) # -4.85^-4. DF: now different.. not as bad
 # Why is 50% interval so different from mean here but not below?
 
 ## Extract finite slopes at 50% (in progress ...)
@@ -87,6 +95,7 @@ mean(b.50fromstan) # -4.85^-4
 post2 <- extract(radonmod2)
 attach(post2)
 finite.slopes <- rep(NA, 1000) 
+
 for (J in 1:1000){
     finite.pop <- lm (a[J,] ~ b)
     finite.slopes[J] <- coef(finite.pop)["b"]

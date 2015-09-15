@@ -48,7 +48,7 @@ generated quantities {
   real<lower=0> s_a;
   real<lower=0> s_b;
 
-  //finite population sd
+  //finite population sd // DF: is this superpopulation instead? All: we think so.
   s_y <- sd(y);
   s_a <- sd(a);
   s_b <- sd(b);

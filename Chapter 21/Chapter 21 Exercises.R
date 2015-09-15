@@ -91,6 +91,8 @@ mo <- lmer(rating ~ (1 | judge) + (1 | pair), data = oly[oly$criterion == "Perfo
 
 # Finite population: the sd within each level of the data. At judge level, finite population variance = 0.2785. 
 
+
+
 # Superpopulation: variation among the modeled probability distribution
 
 
@@ -120,10 +122,13 @@ source("wells.data.R", echo = TRUE)
 
 village = sample(1:20, length(arsenic), replace = T)
 
-data.list.1 <- list(N=N, switc=switc, dist=dist, arsenic=arsenic, village = village, J = length(unique(village)))
-wells_interaction.sf <- stan(file='wells_interaction_village.stan', data=data.list.1,
+data.list.1 <- list(N=N, switc=switc, dist=dist, arsenic=arsenic, village = village, n_vill = length(unique(village)))
+wells_interaction.sf <- stan(file='wells_interaction_village2_debug.stan', data=data.list.1,
                              iter=1000, chains=4)
 print(wells_interaction.sf, pars = c("beta", "lp__"))
+
+
+# changing y_hat from vector[N] y_hat to int y_hat[N] lets the model run. Why.
 
 # Compare this to model 
 dist100 = dist/100
