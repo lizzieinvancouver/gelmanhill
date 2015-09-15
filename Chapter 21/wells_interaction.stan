@@ -4,7 +4,7 @@ data {
   vector[N] dist;
   vector[N] arsenic;
 }
-transformed data {
+transformed data {			// * are these necessary to put in 'transformed data' vs 'data' block?
   vector[N] dist100;         // rescaling
   vector[N] inter;           // interaction
   dist100 <- dist / 100.0;

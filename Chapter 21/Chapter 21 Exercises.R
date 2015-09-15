@@ -148,19 +148,16 @@ invlogit <- function(x) plogis(x)
 
 hi <- 1
 lo <- 0
-dist.delta <- invlogit(b[1] + b[2] * hi + b[3] * arsenic + b[4] * arsenic*dist100) -
-         invlogit(b[1] + b[2] * lo + b[3] * arsenic + b[4] * arsenic*dist100)
-
-
+dist.delta <- invlogit(b[1] + b[2] * hi + b[3] * arsenic + b[4] * arsenic*hi) -
+         invlogit(b[1] + b[2] * lo + b[3] * arsenic + b[4] * arsenic*lo)
 
 # for arsenic 
 
-
 hi <- 1.0
 lo <- 0.5
-as.delta <- invlogit(b[1] + b[2] * dist100 + b[3] * hi + b[4] * arsenic*dist100) -
-         invlogit(b[1] + b[2] * dist100 + b[3] * lo + b[4] * arsenic*dist100)
 
+as.delta <- invlogit(b[1] + b[2] * dist100 + b[3] * hi + b[4] * hi*dist100) -
+         invlogit(b[1] + b[2] * dist100 + b[3] * lo + b[4] * lo*dist100)
 
 # summarize
 
