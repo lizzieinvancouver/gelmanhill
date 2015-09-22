@@ -29,9 +29,9 @@ parameters {
   vector[K] mu_a;
 }
 transformed parameters {
-  matrix[K,K] Sigma_a;
+  matrix[K,K] Sigma_a; // 2 x 2 matrix
   vector[N] scaled_y_hat;
-  matrix[K,2] coef;
+  matrix[K,2] coef; 
   for (n in 1:N)
     scaled_y_hat[n] <- X[n]*a[state[n]];
   Sigma_a <- quad_form_diag(Omega_a, sigma_a);

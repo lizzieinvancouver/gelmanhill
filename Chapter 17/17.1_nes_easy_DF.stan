@@ -5,8 +5,7 @@ data {
   int<lower=1> ideo[N];
   int<lower=1> state[N];
 }
-transformed data {
-  print(max(ido
+
 parameters {
   real<lower=0> sigma;
   real<lower=0> sigma_a;
