@@ -59,28 +59,27 @@ library(arm)
 library(R2WinBUGS)
 heights <- read.dta ("~/Documents/git/gelmanhill/Book_Codes/Ch.13/heights.dta")
 
-attach.all (heights)
-
  # From Ch 13: define variables 
-age <- 90 - yearbn                     # survey was conducted in 1990
+age <- 90 - heights$yearbn                     # survey was conducted in 1990
 age[age<18] <- NA
 age.category <- ifelse (age<35, 1, ifelse (age<50, 2, 3))
-eth <- ifelse (race==2, 1, ifelse (hisp==1, 2, ifelse (race==1, 3, 4)))
-male <- 2 - sex
-# remove cases with missing data
-ok <- !is.na (earn+height+sex) & earn>0 & yearbn>25
-heights.clean <- as.data.frame (cbind (earn, height, sex, race, hisp, ed, age,
-    age.category, eth, male)[ok,])
-n <- nrow (heights.clean)
-attach.all (heights.clean)
 
+with(heights, eth <- ifelse (race==2, 1, ifelse (hisp==1, 2, ifelse (race==1, 3, 4))))
+male <- 2 - heights$sex
+
+# remove NAs
+keep <- !is.na(heights$earn) & heights$earn != 0
 # rename variables
-y <- log(earn)
-x <- height
-n <- length(y)
+y <- log(heights$earn[keep])
+x <- heights$height[keep]
+n <- length(y[keep])
 n.age <- 3
 n.eth <- 4
-age <- age.category
+eth <- eth[keep]
+age <- age.category[keep]
 
-## Regression of log (earnings) on height, age, and ethnicity - warning message! nearly unidentifiable
-summary(M1 <- lmer (y ~ x + (1 + x | eth)))
+## Regression of log (earnings) on height, age, and ethnicity 
+summary(M1 <- lmer (y ~ x + (1|eth) + (1|age))) # how to code interaction of ethnicity and age for varying intercepts?
+
+# now add hierarchical variance parameters..
+
