@@ -5,7 +5,7 @@ library(foreign)
 setwd('~/Documents/git/gelmanhill/')
 
 source('Book_Codes/Ch.13/13.5_Non-nested models.R', chdir=T)
-source("13.5_Non-nested models.R") # where data was cleaned
+# source("13.5_Non-nested models.R") # where data was cleaned
 
 ## Define variables
 y <- successes/(successes+failures)
@@ -27,7 +27,6 @@ summary (aov (y ~ factor (treatment) + factor(airport)))
  # sd of finite popoulation important! reflects varation in existing J_m levels of factor m in the data
  
 
-
 # Q2: make an anova plot for chicks
 
 chick <- read.table("~/Documents/git/gelmanhill/ARM_Data/chicks/chickens.dat", header=T)
@@ -48,12 +47,12 @@ summary(m2 <- aov(mean ~ freq * treat * n, data = ch) )
 # for freq, first
 sqrt(sum(m1$fitted - mean(m1$fitted))^2 / (length(unique(ch$freq))-1)) # need to do it within just freq, across treatments
 
+
 sqrt(sum(m1$fitted[ch$treat==0] - mean(m1$fitted[ch$treat==0]))^2 / (length(unique(ch$treat))-1)) # for control
 sqrt(sum(m1$fitted[ch$treat==1] - mean(m1$fitted[ch$treat==1]))^2 / (length(unique(ch$treat))-1)) # for control
 
 # Q4. Hierarchical model of variance parameters
 
-# 
 library(foreign)
 library(arm)
 library(R2WinBUGS)
