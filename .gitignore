@@ -2,3 +2,7 @@
 .swp
 
 *.history
+
+.Rapp.history
+
+Chapter 21/.Rapp.history
