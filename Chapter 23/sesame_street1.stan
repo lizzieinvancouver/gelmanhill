@@ -42,8 +42,8 @@ model {
   }
 
   for (i in 1:N) {
-    yt_hat[i,2] <- g[siteset[i]] + d * z[i];
-    yt_hat[i,1] <- a[siteset[i]] + b * yt[i,2];
+    yt_hat[i,2] <- g[siteset[i]] + d * z[i]; // This is T, the instrument of encouragement
+    yt_hat[i,1] <- a[siteset[i]] + b * yt[i,2]; // this is y, the post test value
   }
 
   //data level

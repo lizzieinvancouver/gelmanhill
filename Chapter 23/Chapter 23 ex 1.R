@@ -1,5 +1,3 @@
-### "truth" for this group is 7.4
-
 # 
 library(rstan)
 library(foreign)
@@ -13,8 +11,6 @@ sesame <- read.dta("sesame.dta")
 #fit <- lm(regular ~ encour + prelet + as.factor(site) + setting, data=sesame)
 #regular.hat <- fit$fitted
 #lm(postlet ~ regular.hat + prelet + as.factor(site) + setting, data=sesame)
-
-
 
 y=sesame$postlet # post test on letters
 d=sesame$regular # frequency of viewing
