@@ -1,614 +1,0 @@
-invlogit(.27 + .01017*60) # hm, doesn't work, too low
-invlogit(.27) # hm, doesn't work, too low
-?invlogit
-?inv.logit
-??logit
-logit(.27)
-invlogit(.27 + .01017*6) # hm, doesn't work, too low
-invlogit(logit(.27) + logit((.88-.27)/6)*6) # hm, doesn't work, too low
-logit(.27)
-invlogit(logit(.27) + logit((.88-.27)/6)*6) # hm, doesn't work, too low
-(.88-.27)/6)
-invlogit(.27 + (.88-.27)/6)*6) # hm, doesn't work, too low
-invlogit(.27 + (.88-.27/6)*6) # hm, doesn't work, too low
-logit(.27 + (.88-.27/6)*6) # hm, doesn't work, too low
-invlogit(.88) -invlogit(.27)
-slope <- invlogit(.88) -invlogit(.27)
-slope <- (invlogit(.88) -invlogit(.27) )/ 6
-slope
-slope <- (invlogit(.88) -invlogit(.27) )/ 6#
-intercept <- invlogit(.27)
-logit(intercept + slope * 6) # hm, doesn't work, too low
-#binomial#
-birds = read.csv("BankSwallows.csv")#
-birds#
-attach(birds)
-colFates = cbind(num_extinct, (num_colonies)-(num_extinct))#"successes & failures"
-m.same.logit = glm(colFates ~ 1, family = binomial(link = "logit"))
-m.same.logit
-summary(m.same.logit)#coef=0.39058, inv.logit(0.39058)=0.5964223
-logLik(m.same.logit)
-m.time.logit = glm(colFates ~ -1 + period, family = binomial(link = "logit"))
-summary(m.time.logit)
-?binomial
-invlogit(coef(m.same.logit))
-m.time.logit = glm(colFates ~ -1 + period, family = binomial(link = "logit"))
-m.time.logit
-summary(m.time.logit)
-coef(m.time.logit)
-inv.logit(coef(m.time.logit))
-library(boot)
-inv.logit(coef(m.time.logit))
-plogis(coef(m.time.logit))
-?qlogis
-inv.logit(coef(m.same.logit))
-m.time.logit = glm(colFates ~ -1 + period, family = binomial(link = "logit"))
-quartz(height=5,width=10)#
-par(mfrow = c(1,3))#
-hist(usedat$NumBees, freq = F, breaks = 0:max(usedat$NumBees), xlab = "# of bees", main = "data")#
-poisson.vals = dpois(0:max(usedat$NumBees), exp(coef(m.P)[1]))
-#####################
-# different species#
-# BOIM = Bombus impatiens#
-# COIN = Colletes inaequalis#
-# HALI = Halictis ligatus#
-# LATE = Lasioglossum tegulare#
-# OSPU = Osmia pumila#
-# which species have zero-inflated distributions?#
-# test by comparing zero-inflated model to ordinary poisson#
-usedat = bees[bees$Taxon == "OSPU",]#
-m.P = glm(NumBees ~ 1, family = poisson, data = usedat)#
-exp(coef(m.P))#
-exp(confint(m.P))#
-m.ZIP = zeroinfl(NumBees ~1, data = usedat)#
-ICtab(m.P, m.ZIP)#
-# you can also look at the confidence intervals of the 0-term.  Is it very near 0?#
-inv.logit(confint(m.ZIP)[1,])
-##Zero-inflated Poisson (ZIP)##Cannot run this with my version of R! have to update packages#
-library(pscl)#
-library(boot)#
-library(bbmle)#
-bees = read.csv("FarmBees.csv", header = T)
-m.numcols = glm(num_colonies ~ 1 , family = poisson (link = "log"))#
-summary(m.numcols)#
-m.numcols.time = glm(num_colonies ~ period , family = poisson)#
-summary(m.numcols.time)
-AIC(m.numcols,m.numcols.time)#
-anova(m.numcols,m.numcols.time, test="Chi")#
-coef(m.numcols.time)#
-exp(coef(m.numcols.time))#36.83321 colonies on avg early#
-exp(sum(coef(m.numcols.time)))#40.28544 on average late
-library(pscl)#
-library(boot)#
-library(bbmle)#
-bees = read.csv("FarmBees.csv", header = T)
-install.packages("pscl", depend =T)
-library(pscl)
-smia pumila#
-# which species have zero-inflated distributions?#
-# test by comparing zero-inflated model to ordinary poisson#
-usedat = bees[bees$Taxon == "OSPU",]#
-m.P = glm(NumBees ~ 1, family = poisson, data = usedat)#
-exp(coef(m.P))#
-exp(confint(m.P))#
-m.ZIP = zeroinfl(NumBees ~1, data = usedat)#
-ICtab(m.P, m.ZIP)#
-# you can also look at the confidence intervals of the 0-term.  Is it very near 0?#
-inv.logit(confint(m.ZIP)[1,])
-# OPTIONAL BUT USEFUL: graphing your results#
-# histogram of data vs. expectations from poisson and ZIP models#
-quartz(height=5,width=10)#
-par(mfrow = c(1,3))#
-hist(usedat$NumBees, freq = F, breaks = 0:max(usedat$NumBees), xlab = "# of bees", main = "data")#
-poisson.vals = dpois(0:max(usedat$NumBees), exp(coef(m.P)[1]))#
-barplot(poisson.vals, names.arg = 0:max(usedat$NumBees), space = 0, xlab = "# of bees", ylab = "probability", main = "poisson")#
-ZIP.0 = inv.logit(coef(m.ZIP)[2])#
-ZIP.lam = exp(coef(m.ZIP)[1])#
-ZIP.vals = ZIP.0*c(1, rep(0, length(1:max(usedat$NumBees)))) + (1-ZIP.0)*dpois(0:max(usedat$NumBees), ZIP.lam)#
-barplot(ZIP.vals, names.arg = 0:max(usedat$NumBees), space = 0, xlab = "# of bees", ylab = "probability", main = "ZIP", col = "gray20")#
-####Given a site that no bees were observed? what is the probability
-birds2 = read.csv("bluebirds.csv", head= T)#
-head(birds2)
-attach(birds2)#
-hist(count)#
-mean(count)#
-sd(count)
-m1 = glm(count ~ 1, offset = log(hours), family = poisson)#
-coef(m1)#
-exp(coef(m1))#just poisson distribution, so on average, there is ~.5 blueberds per site. this does not account for unsuitable habitat, though#
-#Zip model to account for unsuitable vs suitable habitat, as well as abundance of birds at sites where they are present#
-m3 = zeroinfl(count ~ 1, offset = log(hours))#
-coef(m3)#
-exp(coef(m3))[1]#=0.7=lambda#
-inv.logit(coef(m3))[2]#0.314=p#
-##See if latitude affects abundance/presence/absence of birds#
-#note: you can't just back-transform these values easily- you need to draw the line#
-m4 = zeroinfl(count ~ Latitude, offset = log(hours))#both poisson and binomial processes depend on latitude#
-summary(m4)#
-m5 = zeroinfl(count ~ 1|Latitude, offset = log(hours))#just binomial (presence/absence) depends on latitude; this seems most likely#
-summary(m5)#
-coef(m5)#
-m6 = zeroinfl(count ~ Latitude|1, offset = log(hours))#just poisson processes depends on latitude#count seems to go down with latitude, too but m4 provides better fit then m6 (by 2.6 AIC units) #
-summary(m6)
-ICtab(m4, m5, m6)#model 4- both processes change iwth latitude. the counts and presence decline with latitude (prob of migration increases with latitude)
-setwd("~/Documents/H/gelmanhill")
-source("Chapter 21/wells.data.R", echo = TRUE)
-swtic
-switc
-glm (switc ~ dist100 + arsenic + dist100:arsenic, family=binomial(link="logit"))
-data.list.1 <- c("N", "switched", "dist", "arsenic")#
-wells_interaction.sf <- stan(file='wells_interaction.stan', data=data.list.1,#
-                             iter=1000, chains=4)#
-print(wells_interaction.sf, pars = c("beta", "lp__"))
-data.list.1 <- c("N", "switched", "dist", "arsenic")
-source("wells.data.R", echo = TRUE)
-setwd("~/Documents/H/gelmanhill/Chapter 21")
-source("wells.data.R", echo = TRUE)
-data.list.1 <- c("N", "switched", "dist", "arsenic")
-wells_interaction.sf <- stan(file='wells_interaction.stan', data=data.list.1,#
-                             iter=1000, chains=4)
-library(rstan)
-# Chapter 21 Exercises#
-#
-library(rstan)#
-library(foreign)#
-library(arm)#
-#
-# 1. radon model, how would parameter estimates change if sample size is a. 4x more houses measured, b. 4x more counties, same houses per county, c. 4x houses and 4x counties#
-setwd("~/Documents/H/gelmanhill/")
-# Chapter 21 Exercises#
-#
-library(rstan)#
-library(foreign)#
-library(arm)#
-#
-# 1. radon model, how would parameter estimates change if sample size is a. 4x more houses measured, b. 4x more counties, same houses per county, c. 4x houses and 4x counties#
-setwd("~/Documents/H/gelmanhill/")
-# Getting data in and following Chapter 17 example#
-srrs2 <- read.table("ARM_Data/radon/srrs2.dat", header=T, sep=",")#
-mn <- srrs2$state=="MN"#
-radon <- srrs2$activity[mn]#
-log.radon <- log (ifelse (radon==0, .1, radon))#
-floor <- srrs2$floor[mn]       # 0 for basement, 1 for first floor#
-n <- length(radon)#
-y <- log.radon#
-x <- floor#
-#
-# get county index variable#
-county.name <- as.vector(srrs2$county[mn])#
-uniq <- unique(county.name)#
-J <- length(uniq)#
-county <- rep (NA, J)#
-for (i in 1:J){#
-  county[county.name==uniq[i]] <- i#
-}#
-#
-# no predictors#
-ybarbar = mean(y)#
-#
-sample.size <- as.vector (table (county))#
-sample.size.jittered <- sample.size*exp (runif (J, -.1, .1))#
-cty.mns = tapply(y,county,mean)#
-cty.vars = tapply(y,county,var)#
-cty.sds = mean(sqrt(cty.vars[!is.na(cty.vars)]))/sqrt(sample.size)#
-cty.sds.sep = sqrt(tapply(y,county,var)/sample.size)#
-#
-# radon varying intercept and slope model#
-dataList.1 <- list(N=length(y), y=y, county=county, J=J, x=x)#
-radon_vary_inter_slope.sf1 <- stan(file='Chapter 17/17.1_radon_vary_inter_slope.stan', data=dataList.1,#
-                                   iter=1000, chains=4)#
-print(radon_vary_inter_slope.sf1)
-ml1 <- lmer(y ~ x + (1 | county))#
-display(ml1)#
-summary(ml1)
-# Winter Olympics data - for exercise 2.#
-#
-# From Ch 11#
-#
-oly <- read.csv("Chapter 21/olympicslong.csv")#
-#
-perf.oly <- oly[oly$criterion == "Performance",]#
-#
-mo <- lmer(rating ~ (1 | judge) + (1 | pair), data = oly[oly$criterion == "Performance",])
-# radon varying intercept and slope model#
-dataList.1 <- list(N=length(y), y=y, county=county, J=J, x=x)#
-radon_vary_inter_slope.sf2 <- stan(file='Chapter 21/17.1_radon_vary_inter_slope_finite.stan', data=dataList.1,#
-                                   iter=1000, chains=4)#
-print(radon_vary_inter_slope.sf2)#
-#
-summary(radon_vary_inter_slope.sf2)$summary[1:100,]
-setwd("~/Documents/H/gelmanhill/Chapter 21")#
-source("wells.data.R", echo = TRUE)
-data.list.1 <- c("N", "switched", "dist", "arsenic")#
-wells_interaction.sf <- stan(file='wells_interaction.stan', data=data.list.1,#
-                             iter=1000, chains=4)
-head(data.list.1)
-data.list.1
-data.list.1 <- c("N", "switc", "dist", "arsenic")#
-wells_interaction.sf <- stan(file='wells_interaction.stan', data=data.list.1,#
-                             iter=1000, chains=4)
-data.list.1 <- list(N, switc, dist, arsenic)
-wells_interaction.sf <- stan(file='wells_interaction.stan', data=data.list.1,#
-                             iter=1000, chains=4)
-data.list.1 <- list(N, switc, dist, arsenic)#
-wells_interaction.sf <- stan(file='wells_interaction.stan', data=data.list.1,#
-                             iter=1000, chains=4)
-data.list.1
-names(data.list.1)
-str(data.list.1)
-data.list.1 <- list(N=N, switc=switc, dist=dist, arsenic=arsenic)
-str(data.list.1)
-wells_interaction.sf <- stan(file='wells_interaction.stan', data=data.list.1,#
-                             iter=1000, chains=4)#
-print(wells_interaction.sf, pars = c("beta", "lp__"))
-source("wells.data.R", echo = TRUE)
-library(rstan)#
-library(ggplot2)#
-#
-### Data#
-#
-source("wells.data.R", echo = TRUE)#
-#
-### Logistic regression with one predictor#
-#
-# Figure 5.8#
-#
-p1 <- ggplot(data.frame(dist)) +#
-    geom_histogram(aes(dist), color = "black", fill = "gray", binwidth = 10) +#
-    scale_x_continuous("Distance (in meters) to the nearest safe well") +#
-    scale_y_continuous("")#
-print(p1)#
-#
-# First logistic model: switched ~ dist#
-#
-data.list.1 <- c("N", "switched", "dist")#
-wells_dist.sf <- stan(file='wells_dist.stan', data=data.list.1,#
-                      iter=1000, chains=4)#
-print(wells_dist.sf, pars = c("beta", "lp__"))#
-#
-# More reasonable model: switched ~ dist/100#
-#
-wells_dist100.sf <- stan(file='wells_dist100.stan', data=data.list.1,#
-                         iter=1000, chains=4)#
-print(wells_dist100.sf, pars = c("beta", "lp__"))#
-#
-# Figure 5.9#
-#
-beta.post.2 <- extract(wells_dist100.sf, "beta")$beta#
-beta.mean.2 <- colMeans(beta.post.2)#
-#
-dev.new()#
-p2 <- ggplot(data.frame(switched, dist), aes(dist, switched)) +#
-    geom_jitter(position = position_jitter(width = 0.2, height = 0.01)) +#
-    stat_function(fun = function(x)#
-                  1 / (1 + exp(- beta.mean.2[1] - beta.mean.2[2] * x / 100))) +#
-    scale_x_continuous("Distance (in meters) to the nearest safe well",#
-                       breaks = seq(from = 0, by = 50, length.out = 7)) +#
-    scale_y_continuous("Pr(switching)", breaks = seq(0, 1, 0.2))#
-print(p2)#
-#
-### Logistic regression with second input variable#
-#
-# Figure 5.10#
-#
-dev.new()#
-p3 <- ggplot(data.frame(arsenic)) +#
-    geom_histogram(aes(arsenic), color = "black", fill = "gray", binwidth = 0.25) +#
-    scale_x_continuous("Arsenic concentration in well water") +#
-    scale_y_continuous("")#
-print(p3)#
-#
-# Model: switched ~ dist/100 + arsenic#
-#
-data.list.3 <- c("N", "switched", "dist", "arsenic")#
-wells_d100ars.sf <- stan(file='wells_d100ars.stan', data=data.list.3,#
-                         iter=1000, chains=4)#
-print(wells_d100ars.sf, pars = c("beta", "lp__"))#
-#
-beta.post.3 <- extract(wells_d100ars.sf, "beta")$ beta#
-beta.mean.3 <- colMeans(beta.post.3)#
-#
-# Figure 5.11 (a)#
-#
-dev.new()#
-p4 <- ggplot(data.frame(switched, dist), aes(dist, switched)) +#
-    geom_jitter(position = position_jitter(width = 0.2, height = 0.01)) +#
-    stat_function(fun = function(x)#
-                  1 / (1 + exp(- beta.mean.3[1] - beta.mean.3[2] * x / 100#
-                       - beta.mean.3[3] * 0.5))) +#
-    stat_function(fun = function(x)#
-                  1 / (1 + exp(- beta.mean.3[1] - beta.mean.3[2] * x / 100#
-                       - beta.mean.3[3]))) +#
-    annotate("text", x = c(50,75), y = c(0.35, 0.55),#
-             label = c("if As = 0.5", "if As = 1.0"), size = 4) +#
-    scale_x_continuous("Distance (in meters) to the nearest safe well",#
-                       breaks = seq(from = 0, by = 50, length.out = 7)) +#
-    scale_y_continuous("Pr(switching)", breaks = seq(0, 1, 0.2))#
-plot(p4)
-library(rstan)#
-library(ggplot2)
-source("wells.data.R", echo = TRUE)
-p1 <- ggplot(data.frame(dist)) +#
-    geom_histogram(aes(dist), color = "black", fill = "gray", binwidth = 10) +#
-    scale_x_continuous("Distance (in meters) to the nearest safe well") +#
-    scale_y_continuous("")#
-print(p1)
-library(ggplo2)
-library(ggplot2)
-library(ggplot)
-??ggplot
-??ggplot
-install.packages("ggplot2",dep=T)
-install.packages("ggplot2")
-install.packages("ggplot2")
-install.packages("ggplot2", repos='http://cran.us.r-project.org')
-p1 <- ggplot(data.frame(dist)) +#
-    geom_histogram(aes(dist), color = "black", fill = "gray", binwidth = 10) +#
-    scale_x_continuous("Distance (in meters) to the nearest safe well") +#
-    scale_y_continuous("")#
-print(p1)
-library(ggplot2)
-p1 <- ggplot(data.frame(dist)) +#
-    geom_histogram(aes(dist), color = "black", fill = "gray", binwidth = 10) +#
-    scale_x_continuous("Distance (in meters) to the nearest safe well") +#
-    scale_y_continuous("")#
-print(p1)
-# First logistic model: switched ~ dist#
-#
-data.list.1 <- c("N", "switched", "dist")#
-wells_dist.sf <- stan(file='wells_dist.stan', data=data.list.1,#
-                      iter=1000, chains=4)#
-print(wells_dist.sf, pars = c("beta", "lp__"))
-data.list.1 <- c("N", "switched", "dist")
-wells_dist.sf <- stan(file='wells_dist.stan', data=data.list.1,#
-                      iter=1000, chains=4)
-beta.post.2 <- extract(wells_dist100.sf, "beta")$beta#
-beta.mean.2 <- colMeans(beta.post.2)
-p2 <- ggplot(data.frame(switched, dist), aes(dist, switched)) +#
-    geom_jitter(position = position_jitter(width = 0.2, height = 0.01)) +#
-    stat_function(fun = function(x)#
-                  1 / (1 + exp(- beta.mean.2[1] - beta.mean.2[2] * x / 100))) +#
-    scale_x_continuous("Distance (in meters) to the nearest safe well",#
-                       breaks = seq(from = 0, by = 50, length.out = 7)) +#
-    scale_y_continuous("Pr(switch
-p2 <- ggplot(data.frame(switched, dist), aes(dist, switched)) +#
-    geom_jitter(position = position_jitter(width = 0.2, height = 0.01)) +#
-    stat_function(fun = function(x)#
-                  1 / (1 + exp(- beta.mean.2[1] - beta.mean.2[2] * x / 100))) +#
-    scale_x_continuous("Distance (in meters) to the nearest safe well",#
-                       breaks = seq(from = 0, by = 50, length.out = 7)) +#
-    scale_y_continuous("Pr(switching)", breaks = seq(0, 1, 0.2))
-setwd("~/Documents/H/example-models/ARM/Ch.5")
-data.list.1 <- c("N", "switched", "dist")#
-wells_dist.sf <- stan(file='wells_dist.stan', data=data.list.1,#
-                      iter=1000, chains=4)#
-print(wells_dist.sf, pars = c("beta", "lp__"))
-data.list.1 <- list(N=N, switched=switc, dist=dist)#
-wells_dist.sf <- stan(file='wells_dist.stan', data=data.list.1,#
-                      iter=1000, chains=4)#
-print(wells_dist.sf, pars = c("beta", "lp__"))
-wells_dist100.sf <- stan(file='wells_dist100.stan', data=data.list.1,#
-                         iter=1000, chains=4)#
-print(wells_dist100.sf, pars = c("beta", "lp__"))
-beta.post.2 <- extract(wells_dist100.sf, "beta")$beta#
-beta.mean.2 <- colMeans(beta.post.2)
-p2 <- ggplot(data.frame(switched, dist), aes(dist, switched)) +#
-    geom_jitter(position = position_jitter(width = 0.2, height = 0.01)) +#
-    stat_function(fun = function(x)#
-                  1 / (1 + exp(- beta.mean.2[1] - beta.mean.2[2] * x / 100))) +#
-    scale_x_continuous("Distance (in meters) to the nearest safe well",#
-                       breaks = seq(from = 0, by = 50, length.out = 7)) +#
-    scale_y_continuous("Pr(switching)", breaks = seq(0, 1, 0.2))#
-print(p2)
-p2 <- ggplot(data.frame(switched, dist), aes(dist, switched)) +
-p2 <- ggplot(data.frame(switched, dist), aes(dist, switched)) +#
-    geom_jitter(position = position_jitter(width = 0.2, height = 0.01)) +#
-    stat_function(fun = function(x)#
-                  1 / (1 + exp(- beta.mean.2[1] - beta.mean.2[2] * x / 100))) +#
-    scale_x_continuous("Distance (in meters) to the nearest safe well",#
-                       breaks = seq(from = 0, by = 50, length.out = 7)) +#
-    scale_y_continuous("Pr(switching)", breaks = seq(0, 1, 0.2))
-p2 <- ggplot(data.frame(switched, dist), aes(dist, switched)) +#
-    geom_jitter(position = position_jitter(width = 0.2, height = 0.01)) +#
-    stat_function(fun = function(x)#
-                  1 / (1 + exp(- beta.mean.2[1] - beta.mean.2[2] * x / 100))) +#
-    scale_x_continuous("Distance (in meters) to the nearest safe well",#
-                       breaks = seq(from = 0, by = 50, length.out = 7)) +#
-    scale_y_continuous("Pr(switching)", breaks = seq(0, 1, 0.2))
-p2 <- ggplot(data.frame(switc, dist), aes(dist, switc)) +#
-    geom_jitter(position = position_jitter(width = 0.2, height = 0.01)) +#
-    stat_function(fun = function(x)#
-                  1 / (1 + exp(- beta.mean.2[1] - beta.mean.2[2] * x / 100))) +#
-    scale_x_continuous("Distance (in meters) to the nearest safe well",#
-                       breaks = seq(from = 0, by = 50, length.out = 7)) +#
-    scale_y_continuous("Pr(switching)", breaks = seq(0, 1, 0.2))#
-print(p2)
-p3 <- ggplot(data.frame(arsenic)) +#
-    geom_histogram(aes(arsenic), color = "black", fill = "gray", binwidth = 0.25) +#
-    scale_x_continuous("Arsenic concentration in well water") +#
-    scale_y_continuous("")
-print(p3)
-glm (switc ~ dist100 + arsenic + dist100:arsenic, family=binomial(link="logit"))
-dist100 = dist/100
-glm (switc ~ dist100 + arsenic + dist100:arsenic, family=binomial(link="logit"))
-dir()
-setwd("~/Documents/H/gelmanhill/Chapter 21")
-dir()
-ars <- read.dta("../ARM_Data/arsenic/all.dta")
-head(ars)
-names(ars)
-summary(ars)
-dim(ars)
-sumamry(ars$as)
-summary(ars$as)
-unique(ars$as)
-sort(unique(ars$as))
-length(unique(ars$as))
-names(ars)
-ars$arsenic
-plot(ars$arsenic)
-plot(arsenic)
-names(ars)
-unique(arsenic)
-length(unique(arsenic))
-length(unique(ars$as))
-unique(ars$as)
-print(wells_interaction.sf, pars = c("beta", "lp__"))
-example(interaction.plot)
-interaction.plot(dist100, arsenic, switc)
-interaction.plot(arsenic, dist100, switc)
-?cut
-interaction.plot(cut(arsenic, 5), dist100, switc)
-interaction.plot(cut(arsenic, 5), dist100, switc)
-interaction.plot(dist100, cut(arsenic, 5), switc)
-example(interaction.plot)
-dose
-ToothGrowth$dose
-cut(arsenic, 4)
-ars4 <- cut(arsenic, 4)
-interaction.plot(dist100, ars4, switc)
-interaction.plot(dist100, ars4, switc)
-example(interaction.plot)
-ToothGrowth$supp
-ToothGrowth$len
-switc
-interaction.plot(dist100, ars4, switc)
-b <- colMeans(extract(wells_dae.sf, "beta")$beta)#
-invlogit <- function(x) plogis(x)#
-#
-# for distance to nearest safe well#
-#
-hi <- 1#
-lo <- 0#
-delta <- invlogit(b[1] + b[2] * hi + b[3] * arsenic + b[4] * educ / 4) -#
-         invlogit(b[1] + b[2] * lo + b[3] * arsenic + b[4] * educ / 4)#
-print(mean(delta))#
-#
-# for arsenic
-b <- colMeans(extract(wells_interactions.sf, "beta")$beta)
-b
-wells_interactions.sf
-b <- colMeans(extract(wells_interaction.sf, "beta")$beta)
-b
-invlogit <- function(x) plogis(x)
-hi <- 1#
-lo <- 0
-delta <- invlogit(b[1] + b[2] * hi + b[3] * arsenic + b[4] * educ / 4) -#
-         invlogit(b[1] + b[2] * lo + b[3] * arsenic + b[4] * educ / 4)
-inter
-hi <- 1#
-lo <- 0#
-delta <- invlogit(b[1] + b[2] * hi + b[3] * arsenic + b[4] * arsenic*dist100) -#
-         invlogit(b[1] + b[2] * lo + b[3] * arsenic + b[4] * arsenic*dist100)#
-print(mean(delta))
-delta <- invlogit(b[1] + b[2] * hi + b[3] * arsenic + b[4] * arsenic*dist100) -
-hi <- 1.0#
-lo <- 0.5#
-ars.delta <- invlogit(b[1] + b[2] * dist100 + b[3] * hi + b[4] * arsenic*dist100) -#
-         invlogit(b[1] + b[2] * dist100 + b[3] * lo + b[4] * arsenic*dist100)
-hi <- 1.0#
-lo <- 0.5
-ars.delta <- invlogit(b[1] + b[2] * dist100 + b[3] * hi + b[4] * arsenic*dist100) -#
-         invlogit(b[1] + b[2] * dist100 + b[3] * lo + b[4] * arsenic*dist100)
-ars.delta
-as.delta <- invlogit(b[1] + b[2] * dist100 + b[3] * hi + b[4] * arsenic*dist100) -
-as.delta
-as.delta <- invlogit(b[1] + b[2] * dist100 + b[3] * hi + b[4] * arsenic*dist100) -
-invlogit(b[1] + b[2] * dist100 + b[3] * lo + b[4] * arsenic*dist100)
-as.delta
-dist.delta
-dist.delta <- invlogit(b[1] + b[2] * hi + b[3] * arsenic + b[4] * arsenic*dist100) -#
-         invlogit(b[1] + b[2] * lo + b[3] * arsenic + b[4] * arsenic*dist100)
-dist.delta
-mean(dist.delta)
-dist.m <- mean(dist.delta)
-dist.se <- sd(dist.delta)/sqrt(length(dist.delta)-1)
-dist.se
-as.se <- sd(as.delta)/sqrt(length(as.delta)-1)
-as.m <- mean(as.delta)
-plot(c(dist.m, as.m))
-xlim = c(-2, 4))
-plot(c(dist.m, as.m), pch = 16, #
-	xlim = c(-2, 4))
-abline(h=0, lty=3)
-plot(c(dist.m, as.m), pch = 16, #
-	xlim = c(-2, 4))#
-abline(v=0, lty=3)
-arrows(dist.m-dist.se, dist.m, dist.m+dist.se, dist.m, length = 0)
-arrows(dist.m-dist.se, dist.m, dist.m+dist.se, dist.m, length = 0.2)
-dist.m+dist.se
-arrows(dist.m-dist.se, dist.m, dist.m+dist.se, dist.m)
-dist.m
-dist.m+dist.se
-plot(c(dist.m, as.m), 1:2, pch = 16,
-xlim = c(-2, 4),
-yaxt= "n")
-abline(v=0, lty=3)#
-arrows(dist.m-dist.se, dist.m, dist.m+dist.se, dist.m)
-arrows(dist.m-dist.se, dist.m, dist.m+dist.se, dist.m)
-plot(c(dist.m, as.m), 1:2, pch = 16, #
-	xlim = c(-1, 1),#
-	yaxt= "n")#
-abline(v=0, lty=3)#
-arrows(dist.m-dist.se, dist.m, dist.m+dist.se, dist.m)
-arrows(dist.m-dist.se, dist.m, dist.m+dist.se, dist.m)
-arrows(as.m-as.se, as.m, as.m+as.se, as.m)
-lines(dist.m-dist.se, dist.m+dist.se)
-dist.m-dist.se
-dist.m+dist.se
-dist.m
-dist.delta
-arrows(as.m-as.se, as.m, as.m+as.se, as.m)
-hi <- 1#
-lo <- 0#
-dist.delta <- invlogit(b[1] + b[2] * hi + b[3] * arsenic + b[4] * arsenic*dist100) -#
-         invlogit(b[1] + b[2] * lo + b[3] * arsenic + b[4] * arsenic*dist100)
-wells_interaction.sf
-extract(wells_interaction.sf, "beta")
-extract(wells_interaction.sf, "beta")$beta
-colMeans(extract(wells_interaction.sf, "beta")$beta)
-wells_interaction.sf
-extract(wells_interaction.sf, "beta")
-b <- colMeans(extract(wells_interaction.sf, "beta")$beta)
-b
-dist.delta <- invlogit(b[1] + b[2] * hi + b[3] * arsenic + b[4] * arsenic*dist100) -#
-         invlogit(b[1] + b[2] * lo + b[3] * arsenic + b[4] * arsenic*dist100)
-dist.delta
-arsenic
-arsenic*dist100
-invlogit(b[1] + b[2] * hi + b[3] * arsenic + b[4] * arsenic*dist100) -#
-         invlogit(b[1] + b[2] * lo + b[3] * arsenic + b[4] * arsenic*dist100)
-b[1]
-b[2]
-arsenic
-dist.delta <- invlogit(b[1] + b[2] * hi + b[3] * arsenic + b[4] * arsenic*hi) -#
-         invlogit(b[1] + b[2] * lo + b[3] * arsenic + b[4] * arsenic*lo)
-dist.delta
-hi <- 1.0#
-lo <- 0.5#
-as.delta <- invlogit(b[1] + b[2] * dist100 + b[3] * hi + b[4] * hi*dist100) -#
-         invlogit(b[1] + b[2] * dist100 + b[3] * lo + b[4] * lo*dist100)
-as.delta
-hi <- 1#
-lo <- 0#
-dist.delta <- invlogit(b[1] + b[2] * hi + b[3] * arsenic + b[4] * arsenic*hi) -#
-         invlogit(b[1] + b[2] * lo + b[3] * arsenic + b[4] * arsenic*lo)#
-#
-# for arsenic #
-#
-hi <- 1.0#
-lo <- 0.5#
-as.delta <- invlogit(b[1] + b[2] * dist100 + b[3] * hi + b[4] * hi*dist100) -#
-         invlogit(b[1] + b[2] * dist100 + b[3] * lo + b[4] * lo*dist100)
-dist.m <- mean(dist.delta)#
-dist.se <- sd(dist.delta)/sqrt(length(dist.delta)-1)
-as.m <- mean(as.delta)#
-as.se <- sd(as.delta)/sqrt(length(as.delta)-1)
-plot(c(dist.m, as.m), 1:2, pch = 16, #
-	xlim = c(-1, 1),#
-	yaxt= "n")#
-abline(v=0, lty=3)#
-arrows(dist.m-dist.se, dist.m, dist.m+dist.se, dist.m)#
-arrows(as.m-as.se, as.m, as.m+as.se, as.m)
-dist.m
-as.m
