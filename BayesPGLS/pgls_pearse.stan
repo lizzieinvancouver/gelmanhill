@@ -6,7 +6,7 @@ data{
 	int K;
 	vector[N] y;
 	matrix[N, N] V;
-	matrix[N, N] Lmat;
+	matrix[N, N] Lmat; 
 	vector[N] X;
 }
 transformed data{
@@ -31,16 +31,16 @@ model{
 	real detV;
 	real cdf;
 	real logLike_PGLS;
-	lambda_placeholder <- lambda * Lmat;
+	lambda_placeholder <- lambda * Lmat; //why 
 	V_lambda <- (lambda_placeholder + Ident) .* V;
 	V_sig <- sigma^2*V_lambda;
-	yhat <- B[1] + B[2]*X;
+	yhat <- B[1] + B[2]*X; //estimating independent slopes and intercepts, see below
 	detV <- log_determinant(V_sig);
 	cdf <- ((y-yhat)'*inverse_spd(V_sig)*(y-yhat));
 	logLike_PGLS <-  -0.5*(detV + cdf);
 	increment_log_prob(logLike_PGLS);
 	
-	B ~ normal(0, 1);
-	sigma ~ cauchy(0, 2.5);
-	lambda ~ beta(1, 1);
+	B ~ normal(0, 1); //why not multi-normal for B, model relationship between the two?
+	sigma ~ cauchy(0, 2.5); //okay!
+	lambda ~ beta(1, 1); //okay, standard
 }

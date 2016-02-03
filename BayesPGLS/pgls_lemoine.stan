@@ -2,8 +2,8 @@ data{
 	int N; // number of spp 
 	int K; // 1 (WTF?)
 	vector[N] y; // egg mass 
-	matrix[N, N] V; // will be VCV?
-	matrix[N, N] Lmat; // some sort of pre-designed matrix
+	matrix[N, N] V; // will be VCV, yes!
+	matrix[N, N] Lmat; // matrix full of ones that is the same dimension as the VCV
 	vector[N] X; // body mass
 }
 transformed data{
@@ -21,27 +21,25 @@ parameters{
 transformed parameters{
 }
 model{
-	matrix[N,N] Vlambda; // VCV x lambda??
-	matrix[N,N] Vsigma; // (VCVxlambda) x sigma??
+	matrix[N,N] Vlambda; // VCV * lambda; for scaling tree by estimated lambda value
+	matrix[N,N] Vsigma; // (VCV*lambda) * sigma; for modeling error according to the lambda estimate
 	vector[N] yhat; // holder for predicted values
 	real detV; // determinant of the VCV
 	real cdf;  // cumulative distribution f(x)??
 	real logLike_PGLS; // a log likelihood!
 
-	Vlambda <- (lambda*Lmat + Ident) .* V;
-	Vsigma <- sigma^2*Vlambda;
-
-	yhat <- B[1] + B[2]*X;
+	Vlambda <- (lambda*Lmat + Ident) .* V; //making it so that only the off-diagonals of the VCV are multiplied by lambda
+	yhat <- B[1] + B[2]*X; 
 
 
-	//detV <- log_determinant(Vsigma);
-	//cdf <- ((y-yhat)'*inverse(Vsigma)*(y-yhat));
-	//logLike_PGLS <-  -0.5*(detV + cdf);
-	//increment_log_prob(logLike_PGLS);
+	detV <- log_determinant(Vsigma); //log determinant of the Vsigma
+	cdf <- ((y-yhat)'*inverse(Vsigma)*(y-yhat)); //not sure why cdf...also, this is identical to Will Pearse's code minus the inverse function used...
+	logLike_PGLS <-  -0.5*(detV + cdf); //this is the log-likelihood function defined in Revell 2010, with the exception of the + nlog(2pi)
+	increment_log_prob(logLike_PGLS); //estimating the log likelihood with some function from stan that is more efficient (??)
 	
 	y ~ multi_normal(yhat, Vsigma);
 	
-	B ~ normal(0, 1);
-	sigma ~ cauchy(0, 2.5);
-	lambda ~ beta(1, 1);
+	B ~ normal(0, 1); //why not multi-normal for B, model relationship between the two?
+	sigma ~ cauchy(0, 2.5); //okay!
+	lambda ~ beta(1, 1); //okay, standard
 }
