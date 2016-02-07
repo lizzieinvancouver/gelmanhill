@@ -2,7 +2,7 @@
 // https://github.com/Auerilas/BayesPGLS/blob/master/PGLS.py //
 
 data{
-	int N;
+	int N; //number of species
 	int K;
 	vector[N] y;
 	matrix[N, N] V;
@@ -31,8 +31,8 @@ model{
 	real detV;
 	real cdf;
 	real logLike_PGLS;
-	lambda_placeholder <- lambda * Lmat; //why 
-	V_lambda <- (lambda_placeholder + Ident) .* V;
+	//lambda_placeholder <- lambda * Lmat; //why 
+	V_lambda <- (lambda*Lmat + Ident) .* V;
 	V_sig <- sigma^2*V_lambda;
 	yhat <- B[1] + B[2]*X; //estimating independent slopes and intercepts, see below
 	detV <- log_determinant(V_sig);
