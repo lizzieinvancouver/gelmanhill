@@ -28,16 +28,18 @@ model{
 	real cdf;  // cumulative distribution f(x)??
 	real logLike_PGLS; // a log likelihood!
 
-	Vlambda <- (lambda*Lmat + Ident) .* V; //making it so that only the off-diagonals of the VCV are multiplied by lambda
-	yhat <- B[1] + B[2]*X; 
+	Vlambda <- (lambda*Lmat + Ident) .* V; //making it so that only the off-diagonals of the VCV are multiplied by lambda, need to change so that the original diagonal values are retained
+	Vsigma <- sigma^2*Vlambda; //multplying error structure by lambda transformed VCV to get Vsigma
+	yhat <- B[1] + B[2]*X; //model
+
+	//detV <- log_determinant(Vsigma); //log determinant of the Vsigma
+	//cdf <- ((y-yhat)'*inverse(Vsigma)*(y-yhat)); //not sure why cdf...also, this is identical to Will Pearse's code minus the inverse function used...
+	//logLike_PGLS <-  -0.5*(detV + cdf); //this is the log-likelihood function defined in Revell 2010, with the exception of the + nlog(2pi) which is a constant
+	//increment_log_prob(logLike_PGLS); estimating the log likelihood with some function from stan that is more efficient - multi normal log likelihood
 
 
-	detV <- log_determinant(Vsigma); //log determinant of the Vsigma
-	cdf <- ((y-yhat)'*inverse(Vsigma)*(y-yhat)); //not sure why cdf...also, this is identical to Will Pearse's code minus the inverse function used...
-	logLike_PGLS <-  -0.5*(detV + cdf); //this is the log-likelihood function defined in Revell 2010, with the exception of the + nlog(2pi)
-	increment_log_prob(logLike_PGLS); //estimating the log likelihood with some function from stan that is more efficient (??)
 	
-	y ~ multi_normal(yhat, Vsigma);
+	y ~ multi_normal(yhat, Vsigma); //fitting the model, is much faster and used stan to its full potential
 	
 	B ~ normal(0, 1); //why not multi-normal for B, model relationship between the two?
 	sigma ~ cauchy(0, 2.5); //okay!
