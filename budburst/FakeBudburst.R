@@ -113,6 +113,9 @@ spmeans = 1:nsp # additional days for each species
 
 ####### Generate values
 
+# Beth and Margret think this is right
+# rnorm(nsp, mu_warm + mu_chill + mu_photo, sqrt( var_warm + var_photo + var_chill ) )
+
 bb <- vector()
 
 for(i in 1:nrow(d)){ # yes, this is the slowest way to do this, I know!
@@ -122,7 +125,7 @@ for(i in 1:nrow(d)){ # yes, this is the slowest way to do this, I know!
   photx = d$photo[i]
   chilx = d$chill[i]
   
-  meanx = sitemeans[sitx]+spmeans[sppx]+warmdiff[warmx]+photodiff[photx]+chilldiff[chilx]
+  meanx = sitemeans[sitx] + spmeans[sppx] + warmdiff[warmx]+ photodiff[photx] + chilldiff[chilx]
   sdx = sd.overall
   
   bb <- c(bb, rnorm(1, mean = meanx, sd = sdx))

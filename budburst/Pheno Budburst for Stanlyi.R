@@ -94,6 +94,23 @@ savestan()
 
 #### Now with fake data
 
+### Ideas 2016-03-16
+### 1. Center data
+### 2. Throw out site
+### 3. Parallelize for cluster -- look for training session coming up. Find a way to run each chain on a different node. 
+
+# Lmer on fake
+
+fake.lmer <- lmer(bb ~ site + warm * photo * chill + (warm|sp) + (photo|sp) + (chill|sp), data = fake)
+
+# Lmer on fake with no fixed effects, see if there is still some pooling in the ranefs
+
+fake.lmer2 <- lmer(bb ~ site + (chill|sp) + (warm|sp) + (photo|sp) , data = fake)
+
+fake.lmer3 <- lmer(bb ~ site + (chill+warm+photo|sp), data = fake)
+
+
+
 load("Fake Budburst Smaller.RData")
 
 datalist.f <- list(lday = fake$bb, # budburst as respose 
@@ -116,10 +133,25 @@ launch_shinystan(ssm.f)
 
 #savestan()
 
-tosave <- which(
-  sapply(ls(), function(x) class(get(x)))
-  =="stanfit" |
-    sapply(ls(), function(x) class(get(x)))
-  =="shinystan" 
+
+
+# now with fixed site and fixed sp
+
+
+datalist.f <- list(lday = fake$bb, # budburst as respose 
+                   warm = as.numeric(fake$warm), 
+                   site = as.numeric(fake$site), 
+                   sp = as.numeric(fake$sp), 
+                   photo = as.numeric(fake$photo), 
+                   chill = as.numeric(fake$chill), 
+                   N = nrow(fake), 
+                   n_site = length(unique(fake$site)), 
+                   n_sp = length(unique(fake$sp))
 )
-save(file=paste("Stan Output Fake ", Sys.Date(), ".RData", sep=""), list = ls()[tosave])
+
+doym.f <- stan('stan/lday0_fixedsite_fixedsp.stan', data = datalist.f, iter = 1000, chains = 4) 
+
+
+(sumer <- summary(doym.f)$summary)
+
+savestan()

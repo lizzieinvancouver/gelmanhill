@@ -1,9 +1,11 @@
-savestan <- function() {
-	tosave <- which(
-		sapply(ls(), function(x) class(get(x)))
+savestan <- function(suffix=NULL) {
+  
+  tosave <- which(
+		sapply(ls(envir=.GlobalEnv), function(x) class(get(x)))
 				=="stanfit" |
-		  sapply(ls(), function(x) class(get(x)))
+		  sapply(ls(envir=.GlobalEnv), function(x) class(get(x)))
 		=="shinystan" 
 		  )
-	save(file=paste("Stan Output ", Sys.Date(), ".RData", sep=""), list = ls()[tosave])
+	save(file=paste("Stan Output ", suffix, Sys.Date(), ".RData", sep=""), list = ls(envir=.GlobalEnv)[tosave])
+	
 	} 
