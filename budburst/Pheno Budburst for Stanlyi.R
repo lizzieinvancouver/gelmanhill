@@ -14,7 +14,7 @@ setwd("~/Documents/git/gelmanhill/budburst")
 # <> <> <> <> <> <> <> <> <> <> <> <> <> <> <> <> <> <> <> <>
 
 # To run from saved stan output
-load(sort(dir()[grep("Stan Output", dir())], T)[1])
+load(sort(dir()[grep("Stan Output", dir())], T)[1]); ls()
 
 ssm <- launch_shinystan(doym) 
 # <> <> <> <> <> <> <> <> <> <> <> <> <> <> <> <> <> <> <> <>
@@ -25,7 +25,7 @@ source('stan/savestan.R')
 
 print(toload <- sort(dir("./input")[grep("Budburst Data", dir('./input'))], T)[1])
 
-load(file.path("input", toload))
+load(file.path("input", toload)); ls()
 
 # Prep. Make them numeric
 
@@ -55,7 +55,7 @@ dx$site <- as.numeric(dx$site)
 # Graphic representation of data
 figpath = "figures"
 
-m3 <- lmer(bday ~ warmn * photon * site * chilln + (warmn|sp) + (photon|sp), data = dx[dx$nl == 1,]) # NAs in lday being omitted, doesn't matter if specify nl == 1 or not.
+m3 <- lmer(bday ~ site + warm * photo * chill + (warm|sp) + (photo|sp) + (chill|sp), data = dx[dx$nl == 1,]) # NAs in lday being omitted, doesn't matter if specify nl == 1 or not.
 summary(m3)
 fixef(m3)
 ranef(m3)
@@ -91,3 +91,35 @@ ssm <- launch_shinystan(doym)
 
 savestan()
 
+
+#### Now with fake data
+
+load("Fake Budburst Smaller.RData")
+
+datalist.f <- list(lday = fake$bb, # budburst as respose 
+                 warm = as.numeric(fake$warm), 
+                 site = as.numeric(fake$site), 
+                 sp = as.numeric(fake$sp), 
+                 photo = as.numeric(fake$photo), 
+                 chill = as.numeric(fake$chill), 
+                 N = nrow(fake), 
+                 n_site = length(unique(fake$site)), 
+                 n_sp = length(unique(fake$sp))
+)
+
+doym.f <- stan('stan/lday0.stan', data = datalist.f, iter = 4000, chains = 4) 
+
+sumer <- summary(doym.f)$summary
+
+ssm.f <- as.shinystan(doym.f)
+launch_shinystan(ssm.f) 
+
+#savestan()
+
+tosave <- which(
+  sapply(ls(), function(x) class(get(x)))
+  =="stanfit" |
+    sapply(ls(), function(x) class(get(x)))
+  =="shinystan" 
+)
+save(file=paste("Stan Output Fake ", Sys.Date(), ".RData", sep=""), list = ls()[tosave])
