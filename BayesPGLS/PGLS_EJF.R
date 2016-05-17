@@ -4,6 +4,8 @@ require(caper)
 require(ape)
 require(nlme)
 
+
+setwd("~/Documents/git/gelmanhill/BayesPGLS")
 ##loading shorebird data
 data(shorebird)
 plot(shorebird.tree,cex=.6)
