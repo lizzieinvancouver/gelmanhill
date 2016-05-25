@@ -1,6 +1,7 @@
 
 // Stan model with no sp_site or interactions.
 // Leafout day as a function of species and site of origin as modeled group level factors, and temperature, photoperiod, and chilling as unmodeled factors (experimental manipulation)
+// WORKS no diverging errors
 
 data {
   int<lower=0> N;
@@ -44,9 +45,7 @@ transformed parameters {
 		//  meanx = spmeans[sppx] + sitemeans[sitx] + warmdiff[warmx] + photodiff[photx] + chilldiff[chilx]
 
 		y_hat[i] <- a_sp[sp[i]] + a[site[i]] + b_warm[sp[i]] * warm[i] + b_photo[sp[i]] * photo[i] + b_chill[sp[i]] * chill[i];
-		
-		
-		
+				
 		}
 
 	

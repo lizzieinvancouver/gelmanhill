@@ -99,6 +99,9 @@ savestan()
 ### 2. Throw out site
 ### 3. Parallelize for cluster -- look for training session coming up. Find a way to run each chain on a different node. 
 
+
+Ben
+
 # Lmer on fake
 
 fake.lmer <- lmer(bb ~ site + warm * photo * chill + (warm|sp) + (photo|sp) + (chill|sp), data = fake)
