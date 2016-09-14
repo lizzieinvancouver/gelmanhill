@@ -1,4 +1,4 @@
-# Simulate fake data
+# Simulate fake data.
 
 setwd("C:/Data/Ecology/Classes/Hierarchical Modeling at Harvard/gelmanhill/synchony")
 # setwd("/Users/Lizzie/Documents/git/projects/trophsynch/synchrony")
