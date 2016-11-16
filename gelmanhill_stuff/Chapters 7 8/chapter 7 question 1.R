@@ -24,7 +24,7 @@ plot(simz)
 taketwo<- function() {
   miss<- rbinom(2, 1, .4)
   tally = 2
-  while(!all(miss[c(tally, tally-1)]==0)) {
+  while(all(miss[c(tally, tally-1)]==0)) {
     miss<- c(miss, rbinom(1, 1, .4))
     tally = tally + 1
   }
