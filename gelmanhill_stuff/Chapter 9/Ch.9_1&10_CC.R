@@ -48,6 +48,7 @@ no.encour<-ggplot(control, aes(prenumb,postnumb)) + geom_point(aes(col=encour)) 
   stat_smooth(method="lm")
 plot(no.encour)
 
+# 10b plot
 ggplot(sesame, aes(prenumb,postnumb)) +geom_point() + 
          stat_smooth(method="lm") + facet_grid(. ~ encour)
 
