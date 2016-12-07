@@ -28,13 +28,26 @@ sesame <- read.dta("sesame.dta")
 # those who were encouraged actually watched. Also, that there weren't other learning tools
 # used by the tx or control groups.
 
-for (i in 1:240) {
-  no.tx<- (sesame$id==i) & (sesame$viewenc==0)
-  lm.control<- lm(sesame$postlet~sesame$prelet, subset=no.tx)
+for (i in unique(sesame$id)) {
+  no.tx<- (sesame$viewenc==1)
+  lm.notx<- lm(sesame$postnumb~sesame$prenumb, subset  = no.tx)
+  lm.tx<- lm(sesame$postnumb~sesame$encour + sesame$prenumb + sesame$encour:sesame$prenumb )
 }
-lm.control<- lm(postlet~prelet, data=control)
+summary(lm.notx)
+summary(lm.tx)
+
+tx<-ggplot(sesame, aes(prenumb,postnumb)) +geom_point(aes(col=encour)) + 
+  stat_smooth(method="lm")
+plot(tx)
+
 control<-sesame %>%
   filter(viewenc == 1)
-summary(lm.control)
-ggplot(control, postlet~prelet) + xlab("Pre Encouragement") + ylab("Post Encouragement")
-plot(postlet~prelet, data = control)
+lm.co<- lm(postlet~prelet, data=control)
+summary(lm.co)
+no.encour<-ggplot(control, aes(prenumb,postnumb)) + geom_point(aes(col=encour)) + 
+  stat_smooth(method="lm")
+plot(no.encour)
+
+ggplot(sesame, aes(prenumb,postnumb)) +geom_point() + 
+         stat_smooth(method="lm") + facet_grid(. ~ encour)
+
