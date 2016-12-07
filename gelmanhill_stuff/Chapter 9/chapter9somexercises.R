@@ -1,9 +1,14 @@
-## Started 25 Feb 2015 ##
+## Started 25 Feb 2015 ## Updated 7 Dec 2016 ##
 ## Work by Lizzie on a couple Gelman & Hill Chapter 9 problems ##
 ## It's not necessarily pretty or correct, but it's something ##
 
 library(foreign)
 library(arm)
+################
+# problem 2 #
+###############
+#2 Find a study group where no individuals have ever tried smoking, have no family history of lung cancer. Randomly assign some to smoke.
+#If this doesnt seem tractable since, people know smoking is bad, perhaps find a sub group of smoker an non smokers, who are the same age, fitness levels etc, but hard to account for the covariates unless you have a time machine and can sample in the 1950's.
 
 ################
 # problems 4-5 #
@@ -26,8 +31,8 @@ display(quickwrong5)
 ##################
 # problems 10-11 #
 ##################
-
-sesame <- read.dta("examples/sesame/sesame.dta")
+setwd("~/Documents/git/gelmanhill/gelmanhill_stuff/examples/sesame")
+sesame <- read.dta("sesame.dta")
 
 # 11a:
 plot(postlet~prelet, data=sesame, type="n")
