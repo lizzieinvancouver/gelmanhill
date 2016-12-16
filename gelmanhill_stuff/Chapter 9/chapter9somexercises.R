@@ -64,5 +64,7 @@ points(postnumb~prenumb, data=subset(sesame, regular==1), col="firebrick3")
 
 quick11bnumb <- lm(postnumb~regular+prenumb, data=sesame)
 display(quick11bnumb)
+filter(sesame,viewenc==2&regular==1)
+filter(sesame, regular==1)
 
 # 11c: the viewenc since it sounds like the study did not manipulate regular
