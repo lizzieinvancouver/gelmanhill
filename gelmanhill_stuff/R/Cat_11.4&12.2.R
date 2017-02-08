@@ -22,7 +22,9 @@ d<- d[-which(is.na(d$sqrt)),]
 
 # 4a
 ggplot((d), aes(x=time, y=sqrt)) + xlab("Time") + ylab("Square Root of CD4 Percentage") +
-  geom_point(aes(col=newpid))
+  geom_point(aes(col=as.factor(newpid))) + 
+  geom_smooth(aes(col=as.factor(newpid)),method="lm", se=FALSE) + 
+  theme(legend.position="none")
 
 # 4b - having a lot of trouble! Not sure if this is right
 patient<-unique(d$newpid)
@@ -32,7 +34,7 @@ for(i in 1:length(patient)){
   person[d$newpid==patient[i]]<-i
 }
 # I think this is what it is asking for... need some help understanding the plot
-m<- lmer(d$sqrt~d$time + (1 | person))
+m<- lmer(sqrt~time + (1 + time | person), data=d)
 mod <- lm (d$sqrt ~ 1 + d$time*d$newpid) 
 plot(m)
 display(m)
@@ -42,14 +44,22 @@ summary(m)
 # Separate slopes for each child?
 tx<-d[,7]
 base<-d[,9]
-patient<-d[,2]
+patient<-as.factor(d[,2])
 percent<-d[,11]
 mod2<-lm(percent~patient + base*tx)
 summary(mod2)
-coef(mod)
-# Between Child model ???
+coef(mod2)
+# Between Child model ??? # make a loop (can use dplyr without looping)
+mod4<-lm(percent~1 + base + patient) # or use time from previous part
 mod3<-lmer(percent~1 + (1 | patient))
 summary(mod3)
+coef(mod3)
+ggplot((d), aes(x=time, y=sqrt)) + xlab("Time") + ylab("Square Root of CD4 Percentage") +
+  geom_point(aes(col=as.factor(newpid))) + 
+  geom_smooth(aes(col=as.factor(newpid)),method="lm", se=FALSE) + 
+  theme(legend.position="none")
+ 
+coef(mod4)
 
 ### Cat - Chapter 12 Exercise 2 - 7 February 2017
 # 2a - I think I may have done this in 4c..
