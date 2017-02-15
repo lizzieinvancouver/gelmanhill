@@ -63,22 +63,32 @@ coef(mod4)
 
 ### Cat - Chapter 12 Exercise 2 - 7 February 2017
 # 2a - I think I may have done this in 4c..
+tx<-d[,7]
+base<-d[,9]
+patient<-as.factor(d[,2])
+percent<-d[,11]
 time<-d[,10]
 MO<- lmer(percent~time + (1 | patient))
 c.MO<-coef(MO)
 summary(MO)
-# 2b - is it just including all predictors then?
+# 2b - is it just including all predictors then? 
 MO1<- lmer(percent~time + tx + base + (1 | patient))
 c.MO1<-coef(MO1)
-c.MO1
 summary(MO1)
-# 2c - help please!
+# 2c - help please! Look at pooled vs unpooled ## Ask about AIC values
 noMO<-lm(percent~time)
 c.noMO<-coef(noMO)
 display(MO)
 display(MO1)
 display(noMO)
+
+# The residual var is much lower in the pooled model than the unpooled
 par(mfrow=c(1,2))
-plot(base,coef(MO)$newpid[,1])
+plot(base,percent)
+abline(lm(percent~1), col="red")
+title("Unpooled")
 plot(base,coef(MO1)$newpid[,1])
+abline(lm(percent~1), col="red")
+title("Partial Pooling")
+
 # 2d - They all seem the same... more information for part c but ultimate results?
