@@ -84,7 +84,7 @@ display(noMO)
 
 # The residual var is much lower in the pooled model than the unpooled
 par(mfrow=c(1,2))
-plot(base,coef(MO$newpid), col="red")
+plot(base,coef(MO)$newpid[,1])
 abline(lm(percent~1), col="red")
 title("Unpooled")
 plot(base,coef(MO1)$newpid[,1])
