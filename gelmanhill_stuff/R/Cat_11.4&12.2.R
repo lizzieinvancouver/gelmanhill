@@ -72,7 +72,9 @@ MO<- lmer(percent~time + (1 | patient))
 c.MO<-coef(MO)
 summary(MO)
 # 2b - is it just including all predictors then? 
-MO1<- lmer(percent~time + tx + base + (1 | patient))
+MO1<- lmer(percent~time + (1+tx | patient) + (1+base | patient))
+MO1<- lmer(percent~time + tx + base + (1|patient))
+display(MO1); display(MO)
 c.MO1<-coef(MO1)
 summary(MO1)
 # 2c - help please! Look at pooled vs unpooled ## Ask about AIC values
@@ -83,12 +85,15 @@ display(MO1)
 display(noMO)
 
 # The residual var is much lower in the pooled model than the unpooled
-par(mfrow=c(1,2))
-plot(base,coef(MO)$newpid[,1])
+plot(percent,coef(MO)$patient[,1])
 abline(lm(percent~1), col="red")
 title("Unpooled")
-plot(base,coef(MO1)$newpid[,1])
+plot(percent,coef(MO1)$patient[,1])
 abline(lm(percent~1), col="red")
 title("Partial Pooling")
+dev.new()
+plot(coef(MO)$patient[,1], coef(MO1)$patient[,1])
+abline(0,1, col="blue")
+
 
 # 2d - They all seem the same... more information for part c but ultimate results?
