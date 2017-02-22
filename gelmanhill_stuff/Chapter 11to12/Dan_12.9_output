@@ -1,0 +1,78 @@
+9.A
+> display(fullMod)
+lmer(formula = adjwt ~ floor + Uppm + (1 | fips), data = ind_level)
+            coef.est coef.se
+(Intercept) 351.39    57.18 
+floor        -0.95     0.75 
+Uppm        145.88    31.10 
+
+Error terms:
+ Groups   Name        Std.Dev.
+ fips     (Intercept) 406.73  
+ Residual             113.59  
+---
+number of obs: 12939, groups: fips, 468
+AIC = 161547, DIC = 161572.4
+deviance = 161554.7 
+
+............................................
+> display(subMod)
+lmer(formula = adjwt ~ floor + Uppm + (1 | fips), data = sub)
+            coef.est coef.se
+(Intercept) 313.46    67.07 
+floor        -0.64     1.86 
+Uppm        155.15    35.53 
+
+Error terms:
+ Groups   Name        Std.Dev.
+ fips     (Intercept) 416.77  
+ Residual             115.16  
+---
+number of obs: 2585, groups: fips, 358
+AIC = 33250.1, DIC = 33280.3
+deviance = 33260.2 
+9.B
+AGAIN...............................................
+lmer(formula = adjwt ~ floor + Uppm + (1 | fips), data = sub)
+            coef.est coef.se
+(Intercept) 313.01    64.41 
+floor        -0.72     1.67 
+Uppm        152.59    34.69 
+
+Error terms:
+ Groups   Name        Std.Dev.
+ fips     (Intercept) 420.12  
+ Residual             104.59  
+---
+number of obs: 2592, groups: fips, 382
+AIC = 32992.8, DIC = 33022.4
+deviance = 33002.6 
+lmer(formula = adjwt ~ floor + Uppm + (1 | fips), data = sub)
+            coef.est coef.se
+(Intercept) 346.59    66.74 
+floor        -2.17     1.37 
+Uppm        139.98    35.60 
+
+Error terms:
+ Groups   Name        Std.Dev.
+ fips     (Intercept) 424.13  
+ Residual              84.26  
+---
+number of obs: 2592, groups: fips, 381
+AIC = 32053.9, DIC = 32082.8
+deviance = 32063.3 
+9.C
+lmer(formula = adjwt ~ floor + Uppm + (1 | fips), data = samp)
+            coef.est coef.se
+(Intercept) 249.87   134.44 
+floor        -3.60    16.53 
+Uppm        163.54    65.85 
+
+Error terms:
+ Groups   Name        Std.Dev.
+ fips     (Intercept) 338.03  
+ Residual             168.21  
+---
+number of obs: 90, groups: fips, 64
+AIC = 1273, DIC = 1317.2
+deviance = 1290.1 

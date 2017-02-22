@@ -1,33 +1,35 @@
 ### I am doing something wrong. I can't figure out how to get these two data sources to "talk to each" in the same model 
 rm(list=ls())
 library(dplyr)
+library(tidyr)
 library(lme4)
+library(arm)
 setwd("~/Documents/git/gelmanhill/gelmanhill_stuff/ARM_Data/radon")
 ###not sure what these data are
 cty_level<-read.csv(file = "cty.dat")
 ind_level<-read.csv("srrs2.dat")
-###this looks more promising, but I thinks its for the MN radondata in the book
-source("radon.data.R") #what's this? Not in new download
+###county names?
+countyA<-cty_level$cty
+countyB<-ind_level$county
+setdiff(countyA,countyB)
+intersect(countyA,countyB)
+#no sttfips +cntyfips
+cty_level<-unite(cty_level,fips , c( stfips,ctfips), remove=FALSE)
+ind_level<-unite(ind_level,fips,c(stfips,cntyfips), remove=FALSE)
+ind_level<-left_join(ind_level,cty_level,by= "fips")
+### okay now there is a column that agrees between datasheet
 
-###full model ###I don't know what the actualy response variable should be
-#why is this not jsut a varying intercept lm? with seperate countey level predictors
-#View(cty_level)
-#View(ind_level)
-#y=ind_level[,14]
-#x= ind_level[,8]
-#ppm=cty_level[,7] 
-###do I merge at county level?
-#####redoing G and H code
-summary(lm(y~x))
-lm(formula = y ~ x + factor(county) - 1)
-M1 <- lmer (y ~ x + (1 | county))
-coef(M1)
-fixef(M1)
-#################### help from page 267
-fullMod<-lmer(y~x+ppm+(1|county), data=ind_level)
-summary(fullMod)
-#1/5subseted 
-sub<-sample_frac(D,0.2, replace=TRUE)##what should d be?
+###now for the actual modelL what is my respose variable  page 267
+##do i need this? u.full<-Uppm[fips]
+fullMod<-lmer(adjwt~floor+ Uppm + (1|fips), data=ind_level)
+display(fullMod)
 
-
-subMod<-lmer(y~x+county.u+(1|county),data=sub)
+#1/5subset and repeat
+sub<-sample_frac(ind_level,0.2, replace=TRUE)
+subMod<-lmer(adjwt~floor+ Uppm + (1|fips), data=sub)
+display(subMod)
+### cluster sample (work around) I know the r code isnt right but maybe still useful
+468/5
+samp <- ind_level[ sample(NROW(ind_level$fips), 93),  ]
+newsubMod<-lmer(adjwt~floor+ Uppm + (1|fips), data=samp)
+display(newsubMod)
