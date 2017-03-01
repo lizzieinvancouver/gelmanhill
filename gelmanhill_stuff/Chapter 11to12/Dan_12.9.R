@@ -24,7 +24,7 @@ sub<-sample_frac(ind_level,0.2, replace=TRUE)
 subMod<-lmer(log.radon~floor+ Uppm + (1|fips), data=sub)
 display(subMod)
 ### cluster sample (work around) I know the r code isnt right but maybe still useful
-468/5
+
 onefifth<-sample_frac(cty_level, 0.2, replace = FALSE)
 samp<-semi_join(ind_level, onefifth, by = "fips")
 newsubMod<-lmer(log.radon~floor+ Uppm + (1|fips), data=samp)
