@@ -73,15 +73,6 @@ y_{i}=\alpha_{sp[i]}+\beta_{sp[i]}(Year_{i}-1981)+\epsilon_{i}
 
 \newpage
 
-
-
-\noindent See also: 12.5 in Gelman \& Hill, pages 262-265.
-
-\end{document}
-
-\begin{equation}
-\end{equation}
-
 \noindent For the model \verb|threelevelrandomslope3.stan|, which has a hierachical level for species, nested within (another hierarchical level) study, and partial pooling on the slopes ($\beta$) and intercepts ($\alpha$) by species, but only pooling on study for the slopes; also, note that all species share a common $\sigma$ (for intercepts, $\sigma_{\alpha}$, and slopes, $\sigma_{\beta_{1}}$):
 
 \begin{equation}
@@ -140,3 +131,10 @@ y_{i}=\alpha_{k[j[i]]}+\beta_{k[j[i]]}X_{i}+\epsilon_{i}
 \end{equation}
 
 \vspace{2ex}
+
+\noindent See also: 12.5 in Gelman \& Hill, pages 262-265.
+
+\end{document}
+
+\begin{equation}
+\end{equation}
