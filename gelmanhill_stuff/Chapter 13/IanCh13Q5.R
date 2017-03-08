@@ -64,8 +64,8 @@ summary(cd_lme_slope_int)
 
 ##Model with separate intercepts for each visit.
 cd_mg$visit_fact <- as.factor(cd_mg$VISIT)
-cd_lme_visit <- lmer(CD4PCT_sqrt~baseage+treatmnt+visit_fact+visit_fact:treatmnt + 
-                                 visit_fact:baseage + visit_fact:treatmnt:baseage + (1 | newpid),
+cd_lme_visit <- lmer(CD4PCT_sqrt~baseage_scale+treatmnt+visit_fact+visit_fact:treatmnt + 
+                                 visit_fact:baseage_scale + visit_fact:treatmnt:baseage_scale + (1 | newpid),
                          data=cd_mg)
 summary(cd_lme_visit)
 
@@ -76,13 +76,13 @@ visit_days_scale_new <- seq(from=min(cd_mg$visit_days_scale,na.rm=TRUE),
                             length.out=20)
 visit_fact_new <- levels(cd_mg$visit_fact)
 treatmnt_new <- levels(cd_mg$treatmnt)
-baseage_new <- seq(from=min(cd_mg$baseage,na.rm=TRUE),
-                   to=max(cd_mg$baseage,na.rm=TRUE),
-                   length.out=5)
+baseage_scale_new <- seq(from=min(cd_mg$baseage_scale,na.rm=TRUE),
+                         to=max(cd_mg$baseage_scale,na.rm=TRUE),
+                         length.out=5)
 
 newdat_visit_days <- expand.grid(visit_days_scale=visit_days_scale_new,
                                  treatmnt=treatmnt_new,
-                                 baseage=baseage_new)
+                                 baseage_scale=baseage_scale_new)
                       
 newdat_visit_days$y_pred <- predict(cd_lme_int,newdata=newdat_visit_days,re.form=~0)
 
@@ -104,12 +104,12 @@ ggplot(newdat_visit_days)+
   geom_line(aes(x=visit_days_scale,y=y_pred,color=treatmnt))+
   geom_ribbon(aes(x=visit_days_scale,ymin=y_lwr,ymax=y_upr,fill=treatmnt),
               alpha=0.2)+
-  facet_grid(facets=.~as.factor(baseage))+
+  facet_grid(facets=.~as.factor(baseage_scale))+
   theme_bw()
 
 newdat_visit_fact <- expand.grid(visit_fact=visit_fact_new,
                                  treatmnt=treatmnt_new,
-                                 baseage=baseage_new)
+                                 baseage_scale=baseage_scale_new)
 
 newdat_visit_fact$y_pred <- predict(cd_lme_visit,newdata=newdat_visit_fact,re.form=~0)
 
@@ -128,7 +128,7 @@ ggplot(newdat_visit_fact)+
              position=position_dodge(width=1))+
   geom_linerange(aes(x=as.factor(visit_fact),ymin=y_lwr,ymax=y_upr,color=treatmnt),
                  alpha=0.8,position=position_dodge(width=1))+
-  facet_grid(facets=.~as.factor(baseage))+
+  facet_grid(facets=.~as.factor(baseage_scale))+
   theme_bw()
 
 newdat_visit_days$y_pred_slope_int <- predict(cd_lme_slope_int,newdata=newdat_visit_days,re.form=~0)
@@ -149,5 +149,5 @@ ggplot(newdat_visit_days)+
              position=position_dodge(width=1))+
   geom_ribbon(aes(x=as.factor(visit_fact),ymin=y_lwr_slope_int,ymax=y_upr_slope_int,fill=treatmnt),
               alpha=0.2,position=position_dodge(width=1))+
-  facet_grid(facets=.~as.factor(baseage))+
+  facet_grid(facets=.~as.factor(baseage_scale))+
   theme_bw()
