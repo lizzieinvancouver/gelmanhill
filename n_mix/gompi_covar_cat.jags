@@ -1,0 +1,32 @@
+model {
+    
+    #priors
+    lambda ~ dnorm(10, 0.01)T(0,)
+    iota ~ dunif(0,10)
+    p ~ dnorm(0.8,1000)T(0,1)
+    K ~ dnorm(50, 0.001)
+    
+    a0r ~ dnorm(0.5,0.1)
+    a1r ~ dnorm(0,1)
+    
+    phi ~ dunif(0.001,0.999)
+    
+    for(i in 1:nSites) {
+    # Initial abundance
+    #icat[i] ~ dbern(phi)
+    N[i,1] ~ dpois(lambda)
+    y[i,1] ~ dbin(p, N[i,1])
+    
+    # Regression for r
+    r[i] <- a0r + a1r * x1r[i]
+    
+    for(t in 2:nYears) {
+    cat[i,t-1] ~ dbern(phi)
+    ncat[i,t-1] <- 1-cat[i,t-1]
+    muN[i,t-1] <- ((N[i,t-1] * exp(r[i] * (1 - log(N[i,t-1] + 1) / 
+                    log(K + 1))))*ncat[i,t-1]) + iota
+    N[i,t] ~ dpois(muN[i,t-1])
+    y[i,t] ~ dbin(p, N[i,t])
+    }
+    }
+    }
