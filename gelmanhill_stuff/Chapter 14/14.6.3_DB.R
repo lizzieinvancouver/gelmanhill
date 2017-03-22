@@ -12,6 +12,9 @@ rat<-read.csv(file="hvs02_sorted.csv", h=TRUE)
 rat.mod<-glm(rodent2~race+poverty+old+factor(sequenceno), family=binomial(link="logit"),data=rat)
 display(rat.mod)
 altrat.mod<-glmer(rodent2~race+poverty+old+(1|sequenceno), family=binomial(link="logit"),data=rat)
+# careful! check out variables you're using as grouping factors before you use them!
+dim(rat)
+length(unique(rat$sequenceno))
 display(altrat.mod)
 ##no interactions sig
 .19/4

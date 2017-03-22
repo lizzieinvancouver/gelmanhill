@@ -17,11 +17,11 @@ setwd("~/Documents/git/gelmanhill/gelmanhill_stuff/ARM_Data/rodents")
 d<-read.csv("hvs02_sorted.csv", header=TRUE)
 
 # 14.3a
-# decided to use 'housing' as building separator between community districts
+# decided to use 'housing' as building separator between community districts ... okay, why housing (4 levels: public, rent-controlled etc.) and not race (7 levels) or such?
 mod<-glmer(rodent2~old+race+(1|housing),data=d, family=binomial(link="logit"))
 display(mod)
 
-#14.3b - is cd community?
+#14.3b - is cd community? Yes! Check out the doc file!
 mod1<-glmer(rodent2~old+race+(1+housing|cd), data=d, family=binomial(link="logit"))
 display(mod1)
 
