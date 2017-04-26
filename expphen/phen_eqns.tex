@@ -1,0 +1,30 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[top=1.00in, bottom=1.0in, left=1in, right=1in]{geometry}
+\usepackage{amsmath}
+
+\begin{document}
+
+\noindent To understand how experimental warming and precipitation treatments affect soil moisture ($y_{i}$) I want to fit a hierachical model with 3 levels: one level for site, represented here by $j$; one level for year, represented here by $k$; and one level for day of year, represented here by $l$. $\beta_{1}$ is the warming treatment and $\beta_{2}$ is the precipitation treatment.  I am also interested in their interactive effects. Each observation is $i$, and partial pooling on the intercept ($\alpha$) only:
+
+% no commas
+
+\begin{equation}
+y_{i}=\alpha_{j[i]1}+\alpha_{k[i]2}+\alpha_{l[i]3}+\beta_{1}X_{i1}+\beta_{2}X_{i2}+\beta_{1}\beta_{2}X_{i1}X_{i2}+\epsilon_{i}
+\end{equation}
+The multilevel parts of the model are:
+\begin{equation}
+\alpha_{j1} \sim N(\mu_{\alpha_1}, \sigma^{2}_{\alpha_1})
+\end{equation}
+
+\begin{equation}
+\alpha_{k2} \sim N(\mu_{\alpha_2}, \sigma^{2}_{\alpha_2})
+\end{equation}
+
+\begin{equation}
+\alpha_{l3} \sim N(\mu_{\alpha_3}, \sigma^{2}_{\alpha_3})
+\end{equation}
+
+
+
+\end{document}
+
