@@ -34,31 +34,3 @@ expclim2$doy_index = as.integer(as.factor(expclim2$doy))
 # fit with lmer2stan
 sm_stan = lmer2stan(soilmois1~target_cent + (1|site_index), data=expclim2)
 sm_stan
-
-#fit model with stan
-
-
-datalist <- with(fake, 
-                   list(y = bb, 
-                        chill = as.numeric(chill), 
-                        force = as.numeric(force), 
-                        photo = as.numeric(photo),
-                        lat = as.numeric(lat),
-                        sp = as.numeric(sp),
-                        #         lab = as.numeric(lab),
-                        N = nrow(fake),
-                        n_sp = length(unique(sp))
-                        #        n_lab = length(unique(lab))
-                   )
-)
-
-if(dostan){ # M2: no labgroup
-  osp.f <- stan('stan/ospreeM4.stan', data = datalist.f, 
-                iter = 2882
-  ) 
-  sf <- summary(osp.f)$summary
-  
-  ssm.f <- as.shinystan(osp.f)
-  # launch_shinystan(ssm.f)
-  savestan("Fake NoLab")
-}
