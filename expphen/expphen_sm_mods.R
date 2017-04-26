@@ -1,3 +1,5 @@
+##Model-fitting for soil moisture and phenology analyses
+##Started Apsil 24, 2017
 ## housekeeping
 rm(list=ls()) 
 options(stringsAsFactors = FALSE)
