@@ -26,5 +26,26 @@ The multilevel parts of the model are:
 
 
 
+\noindent To understand how soil moisture  affects GDDcrit($y_{i}$) (the accumulated growing degree days on the day of a phenoogical event such as bud burst), I want to fit a hierachical model with 2 levels: one level for site, represented here by $j$; and one level for species, represented here by $k$;  $\beta_{1}$ is soil moisture (averaged over the whole year- not sure if this is best).  Each observation is $i$, and partial pooling could be on the intercept ($\alpha$) only or on the slope and intercept. I'm not sure which is best....shown here for pooling on both slope and intercept for species, and intercept-only for site:
+
+% no commas
+
+\begin{equation}
+y_{i}=\alpha_{j[i]1}+\alpha_{k[i]2}+\beta_{1}X_{k[i]1}+\epsilon_{i}
+\end{equation}
+The multilevel parts of the model are:
+\begin{equation}
+\alpha_{j1} \sim N(\mu_{\alpha_1}, \sigma^{2}_{\alpha_1})
+\end{equation}
+
+\begin{equation}
+\alpha_{k2} \sim N(\mu_{\alpha_2}, \sigma^{2}_{\alpha_2})
+\end{equation}
+
+\begin{equation}
+\beta_{k1} \sim N(\mu_{\beta_1}, \sigma^{2}_{\beta_1})
+\end{equation}
+
+
 \end{document}
 
